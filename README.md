@@ -1,48 +1,45 @@
-# α-Synuclein Dimer Interfaces | Computational Research Portfolio
+# α-Synuclein Research | Computational Science, Quality & Risk Portfolio
 
-**Structural bioinformatics · Molecular modeling · Python · Scientific data quality**
+**Structural bioinformatics · Scientific QA/QC · Data integrity · Risk-based decision-making · Regulatory reasoning**
 
-## Research overview
+## Project at a glance
 
-This portfolio presents an exploratory computational study of **wild-type (WT)** and **A53T α-synuclein** dimer-interface models. The work investigates how predicted interfaces vary across models, how candidate interchain pockets can be examined, and how research code can improve the traceability of docking records.
+This portfolio translates an exploratory **wild-type (WT) and A53T α-synuclein** computational research project into concrete examples of scientific analysis, research-record quality control, process improvement, risk assessment and regulatory-oriented scientific judgment. It separates **work performed on the historical research** from **software tests independently runnable here** and from **illustrative regulatory applications**.
 
-The project connects structural prediction, model-confidence assessment, interface and pocket geometry, historical molecular docking, molecular-dynamics workflow documentation, and a **reproducible synthetic-data validation example**. It is computational, hypothesis-generating work, not experimental verification of a stable dimer or therapeutic ligand.
+The study examined predicted dimer interfaces, structural confidence, candidate interchain pockets, historical ligand-docking records and short molecular-dynamics workflows. The strongest independently runnable demonstration in this repository is a Python auditor tested with **synthetic** scientific records. This is a skills portfolio, **not a published clinical or experimental validation study**.
 
-## Research questions
+## Five professional competencies, with evidence
 
-1. How do selected WT and A53T predicted dimer models differ in interface confidence and contact geometry?
-2. How sensitive are candidate interchain pocket descriptions to model selection and structural preparation?
-3. How can Python checks detect inconsistent computational records before interpretation?
-
-## Project work
-
-| Area | Methods | Portfolio evidence |
+| Competency | Demonstration | Examine the work |
 | --- | --- | --- |
-| Structural bioinformatics | Predicted-dimer confidence and interface comparisons | [Model and interface analysis](portfolio/structural_bioinformatics.md) |
-| Candidate pocket investigation | Contact maps, ensemble variation, pocket geometry | [Pocket analysis](portfolio/pocket_analysis.md) |
-| Docking and MD workflow | AutoDock Vina records and OpenMM workflow documentation | [Molecular modeling](portfolio/molecular_modeling.md) |
-| Scientific programming | Python, synthetic fault injection, test cases | [Runnable data-quality demo](qa_auditor/README.md) |
+| **Quality Assurance (QA)** | Requirements-to-test traceability, discrepancy investigation, corrective controls and regression verification | [B · Research QA & QC](portfolio/B_quality_assurance_control.md) |
+| **Quality Control (QC)** | Programmatic checking of score, configuration, seed, version and file-inventory inconsistencies in synthetic records | [Runnable Python auditor](qa_auditor/README.md) |
+| **Risk assessment & management** | Context-of-use-specific risk evaluation, control selection and residual-risk decisions for computational evidence | [D · Scientific risk management](portfolio/D_scientific_risk_management.md) |
+| **Regulatory Affairs** | An illustrative research-to-regulated-use gap analysis: claims, intended use, evidence, traceability and change control | [E · Regulatory reasoning](portfolio/E_regulatory_affairs.md) |
+| **Computational / research science** | WT/A53T predicted-interface comparisons, pocket-analysis approaches and molecular modeling workflow interpretation | [A · Structural bioinformatics](portfolio/A_structural_bioinformatics.md) · [C · Modeling & MD](portfolio/C_molecular_modeling.md) |
 
-## Reproducible demonstration
+## Selected documented outcomes
 
-The included Python auditor uses **synthetic Vina-style scientific records** to test format and consistency checks. It does **not** need original protein structures, docking outputs or molecular trajectories. It demonstrates test design, validation logic, error handling and results comparison, but does not reproduce the original molecular screening study.
+- The historical ensemble analysis examined **five predicted structures per WT and A53T job**, including confidence, interchain contacts and model-selection sensitivity. Original prediction files remain private; its numerical results cannot be recomputed from this repository alone.
+- The synthetic QA demonstration compares baseline and revised checks using **13 deliberately injected faults and one clean control**. The earlier baseline detected **9/13** faults and the revised checker detected **13/13**; see the included executable code, which generates its own reports when run.
+- A reproducibility-focused interpretation distinguishes **record consistency** from **biological validity**: a log matching a configuration is necessary for traceability, not proof that docking establishes binding.
+- A documented research risk assessment distinguishes uncertainty in structural models, simulation duration, evidence provenance and public-facing claims. The public case study presents the reasoning and representative controls, not the private corrective-action register.
 
-See [QA/QC software demonstration](qa_auditor/README.md) for requirements and test commands.
+## Explore the work
 
-## Methods and interpretation
+**A.** [Structural Bioinformatics](portfolio/A_structural_bioinformatics.md)
+**B.** [Quality Assurance, Quality Control & Data Integrity](portfolio/B_quality_assurance_control.md)
+**C.** [Molecular Modeling & Simulation](portfolio/C_molecular_modeling.md)
+**D.** [Scientific Risk Management](portfolio/D_scientific_risk_management.md)
+**E.** [Regulatory Affairs & Research Compliance](portfolio/E_regulatory_affairs.md)
 
-**Tools used in the broader research:** AlphaFold Server, AutoDock Vina, Python, molecular visualization, pocket-analysis workflows and OpenMM. These methods were applied at different stages; only the synthetic Python demonstration is independently runnable from the files in this portfolio.
+**Run the evidence-backed software example:** [Python Scientific-Record Auditor](qa_auditor/README.md)
+**Understand the evidence scope:** [Methods, reproducibility and limitations](docs/methods_and_evidence.md)
 
-**Scientific interpretation:** The analyzed structures are computational predictions. Candidate interfaces and pockets require independent confirmation; docking scores cannot establish experimental binding, and the archived short MD work cannot demonstrate long-term stabilization. These boundaries are documented concisely in [Methods and evidence](docs/methods_and_evidence.md).
+## Research integrity and interpretation
 
-## Repository contents
+The structural models and putative pockets are computational hypotheses. **Predicted contacts do not establish a physiological dimer, docking scores do not prove experimental ligand binding, and short MD simulations do not demonstrate biological stabilization.** Internal laboratory/research records, restricted or unreviewed structural derivatives, and private audit materials are not included. FDA, GxP and other regulatory concepts are discussed as **skills-oriented analytical examples**, not as claims of formal project compliance, inspection, certification or regulatory submission.
 
-- `portfolio/`: research case studies in accessible scientific language.
-- `qa_auditor/`: runnable Python demonstration and synthetic test suites.
-- `docs/`: methods, provenance boundaries and scientific interpretation.
+## Scope and attribution
 
-This is a **curated portfolio** separate from the private original research archive. It intentionally excludes source predictions, receptor derivatives, historical docking poses/logs and molecular dynamics trajectories. It is not a complete rerun of the historical research.
-
-## Attribution and reuse
-
-Research direction and scientific evaluation were researcher-led; AI assistance was used for some coding, debugging and documentation. The included software has **no open-source license yet**; code ownership and attribution must be confirmed before a public release. Third-party model outputs and derivatives are not included.
+This repository contains a curated narrative and a synthetic-data Python example, not the complete historical molecular dataset. Scientific activities and interpretation were researcher-directed; some programming, debugging and drafting received AI assistance. No third-party structure files are redistributed, and no open-source software license is granted. Review ownership and reuse terms before any public visibility change.

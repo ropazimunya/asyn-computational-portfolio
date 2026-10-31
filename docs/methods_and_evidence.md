@@ -1,13 +1,16 @@
-# Methods and evidence scope
+# Methods, evidence and reproducibility
 
-This portfolio presents exploratory computational research and a standalone synthetic-data coding demonstration.
+The repository contains **two different evidence classes**:
 
-| Topic | Documented work | What this portfolio establishes |
+1. **Historical research work** involving predicted WT/A53T α-synuclein structures, ensemble inspection, pocket geometry, docking and MD workflows. Original research data remain private; numerical structural and simulation findings are not independently reproducible from this repository.
+2. **Runnable synthetic scientific-record QA code**. Python source and test fixtures are included; the executable demonstration checks specific designed consistency faults, not molecular or biological validity.
+
+| Portfolio component | Evidence available here | Appropriate interpretation |
 | --- | --- | --- |
-| WT/A53T models | AlphaFold Server predicted dimers and confidence analysis | Historical structural research workflow; original models absent |
-| Interface pockets | Contact and pocket-geometry investigation | Exploratory candidate-region assessment; not experimental pocket validation |
-| Docking | Archived Vina-style screening workflow | Historical methods described; actual docking not reproduced here |
-| Molecular dynamics | OpenMM setup and short simulation documentation | Workflow experience, not demonstrated ligand stabilization |
-| Python QA | Synthetic fault-injection and audit scripts | Executable software test demonstration with defined fixture coverage |
+| A — Structural analysis | Historical methods and recorded figures summarized in text | Descriptive predicted-model analysis |
+| B — QA/QC | Executable Python auditors, synthetic fault generation and regression tests | Software behavior on designed synthetic inputs |
+| C — Modeling/MD | Historical workflow narrative, no original trajectories or docking archives | Documented workflow and critical interpretation |
+| D — Risk management | Portfolio risk scenarios, controls and evidence criteria | Qualitative scientific decision framework |
+| E — Regulatory Affairs | Hypothetical intended-use and evidence-gap assessment | Regulatory-oriented reasoning, not FDA compliance |
 
-Synthetic test success checks software behavior against designed scenarios. It is not biological, regulatory, or laboratory-method validation. The private archive is retained as the research record; this package is deliberately not a complete reproduction of it.
+**Limitations:** Neither predicted dimer contacts nor docking scores prove molecular activity; short simulation runs do not establish long-term stabilization. Test cases selected during development do not demonstrate real-world fault-detection sensitivity. The repository is not a complete historical research rerun or an FDA submission.

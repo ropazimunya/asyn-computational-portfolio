@@ -1,6 +1,6 @@
 # Python scientific-record consistency demonstration
 
-A proof-of-concept Python auditor for **synthetic Vina-style ZIP records**. The demonstration tests whether selected configuration, docking-log, pose-score, input-inventory and summary fields are consistent. It does **not** run molecular docking or analyze original biological outputs.
+A research QA/QC proof-of-concept Python auditor for **synthetic Vina-style ZIP records**. The demonstration tests whether selected configuration, docking-log, pose-score, input-inventory and summary fields are consistent. It does **not** run molecular docking or analyze original biological outputs.
 
 ## Requirements
 Python 3.9+; standard library only. Run the following commands from the repository root.
@@ -23,6 +23,10 @@ python3 qa_auditor/tests/reviewer_round6_tests.py
 - `validation/compare_versions.py`: comparison of baseline and updated behavior using synthetic cases.
 - `validation/validate_injected_faults.py`: synthetic fixture generation and test cases.
 - `tests/`: independently structured regression and hardening scenarios.
+
+## Professional quality-control connection
+
+See [Chunk B](../portfolio/B_quality_assurance_control.md) for the requirements, corrective control, and test-evidence mapping behind this demonstration. The checks detect record inconsistencies within designed synthetic fixtures and do not constitute a regulated software-validation package.
 
 ## Scope
 These scripts are specialized to a particular Vina-style ZIP naming convention and are not a general archival validation platform. Passing tests supports their behavior on defined synthetic cases only. It does not prove a predicted pocket, binding affinity or long-term stabilization.
