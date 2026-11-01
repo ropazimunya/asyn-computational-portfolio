@@ -42,4 +42,4 @@ The structural models and putative pockets are computational hypotheses. **Predi
 
 ## Scope and attribution
 
-This repository contains a curated narrative and a synthetic-data Python example, not the complete historical molecular dataset. Scientific activities and interpretation were researcher-directed; some programming, debugging and drafting received AI assistance. No third-party structure files are redistributed, and no open-source software license is granted. Review ownership and reuse terms before any public visibility change.
+This repository contains a curated narrative and a synthetic-data Python example, not the complete historical molecular dataset. Research and portfolio owner: Ropafadzo Zimunya. No third-party structure files are redistributed. The original Python QA/QC software is available under the MIT License in `qa_auditor/LICENSE`. Scientific case studies and research documentation are not covered by that software license.
