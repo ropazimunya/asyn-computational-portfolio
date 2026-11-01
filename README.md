@@ -1,5 +1,7 @@
 # Computational Research Quality and Scientific Evidence
 
+[![Computational research portfolio validation](https://github.com/ropazimunya/asyn-computational-portfolio/actions/workflows/python-validation.yml/badge.svg)](https://github.com/ropazimunya/asyn-computational-portfolio/actions/workflows/python-validation.yml)
+
 **Ropafadzo Zimunya | Independent research and professional portfolio**
 
 This portfolio shows how I examine computational research records, investigate discrepancies, test quality controls and decide which conclusions the evidence can support. It draws on an exploratory WT/A53T α-synuclein project and includes a runnable Python demonstration using synthetic records.
