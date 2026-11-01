@@ -1,0 +1,8 @@
+PASS seed_decimal exit 1 reports True types ['CHECK_FAILED', 'INVALID_LOG']
+PASS seed_suffix exit 1 reports True types ['CHECK_FAILED', 'INVALID_LOG']
+PASS nested_ligand exit 1 reports True types ['MISSING_LIGAND_INPUT', 'UNEXPECTED_LIGAND_PATH']
+PASS negative_num_modes exit 1 reports True types ['CHECK_FAILED', 'INVALID_CONFIG', 'MISSING_CONFIG_FIELD']
+PASS blank_csv_line exit 0 reports True types []
+PASS invalid_archive exit 1 reports True types ['INVALID_ARCHIVE']
+PASS clean exit 0 reports True types []
+RESULT 7 / 7

@@ -1,0 +1,72 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux",
+  "suites": [
+    {
+      "suite": "comparison",
+      "exit": 0
+    },
+    {
+      "suite": "historical_independent",
+      "exit": 0
+    },
+    {
+      "suite": "hardening",
+      "exit": 0
+    },
+    {
+      "suite": "round4",
+      "exit": 0
+    },
+    {
+      "suite": "round5",
+      "exit": 0
+    },
+    {
+      "suite": "round6",
+      "exit": 0
+    },
+    {
+      "suite": "portfolio_integrity",
+      "exit": 0
+    }
+  ],
+  "assertions": {
+    "comparison_rows": true,
+    "comparison_summary": true,
+    "review_set": true,
+    "no_independent_failures": true,
+    "focused_assertions": true
+  },
+  "comparison": {
+    "cases": 14,
+    "introduced_faults": 13,
+    "v1_detected_faults": 9,
+    "v2_detected_faults": 13,
+    "v2_passes": 14
+  },
+  "historical_independent": {
+    "PASS": 26,
+    "REVIEW": 3,
+    "FAIL": 0
+  },
+  "review_cases": [
+    {
+      "id": "C7",
+      "expectation": "SILENT (policy-dependent)",
+      "observed": "ALERT(6)"
+    },
+    {
+      "id": "F18",
+      "expectation": "SILENT (by design)",
+      "observed": "SILENT"
+    },
+    {
+      "id": "C9",
+      "expectation": "SILENT",
+      "observed": "ALERT(2)"
+    }
+  ],
+  "all_assertions_passed": true,
+  "scope": "synthetic demonstrations only; scenarios overlap; REVIEW is not PASS"
+}

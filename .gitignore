@@ -1,5 +1,7 @@
 __pycache__/
 *.pyc
 .DS_Store
+.venv/
 qa_auditor/tests/results.json
 qa_auditor/validation/results/
+qa_auditor/generated/

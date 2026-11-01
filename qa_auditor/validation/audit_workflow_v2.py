@@ -46,57 +46,31 @@ def parse_config(text):
 
 
 def parse_log(text):
-    """Parse a single set of Vina-like execution fields; reject ambiguity."""
-    def unique(pattern, label, flags=re.M):
-        matches = list(re.finditer(pattern, text, flags))
-        if len(matches) > 1:
+    """Identify recognized fields before validating complete values."""
+    lines=text.splitlines()
+    def one(label, candidates, pattern):
+        if len(candidates)>1:
             raise ValueError(f'multiple {label} fields found in one log')
-        return matches[0] if matches else None
-
+        if not candidates: return None
+        match=re.fullmatch(pattern,candidates[0])
+        if match is None: raise ValueError(f'malformed {label} field')
+        return match
     def xyz(label):
-        # First identify EVERY line with the recognized label, even malformed lines.
-        # Validating only regex matches misses invalid duplicate fields.
-        candidates = [line for line in text.splitlines()
-                      if re.match(r'^' + label + r'[ \t]*:', line)]
-        if len(candidates) > 1:
-            raise ValueError(f'multiple {label} fields found in one log')
-        if not candidates:
-            return None
-        pattern = (r'^' + label + r'[ \t]*:[ \t]*X[ \t]*(' + FLOAT +
-                   r')[ \t]+Y[ \t]*(' + FLOAT +
-                   r')[ \t]+Z[ \t]*(' + FLOAT + r')[ \t]*$')
-        matched = re.fullmatch(pattern, candidates[0])
-        if matched is None:
-            raise ValueError(f'malformed {label} field: {candidates[0][:150]!r}')
-        values = tuple(map(float, matched.groups()))
-        if not all(map(math.isfinite, values)):
-            raise ValueError(f'nonfinite {label}')
-        return values
-
-    version = unique(r'^AutoDock Vina v(\S+)', 'version')
-    exhaust = unique(r'^Exhaustiveness:[\t ]*(\S+)', 'exhaustiveness')
-    seed = unique(r'random seed:[\t ]*([^\s)]+)', 'seed')
-    seed_number = None
-    if seed:
-        if not re.fullmatch(r'-?\d+', seed.group(1)):
-            raise ValueError(f'invalid integer seed: {seed.group(1)!r}')
-        seed_number = int(seed.group(1))
-    mode = unique(r'^[ \t]*1[ \t]+(' + FLOAT + r')[ \t]+0(?:\.0+)?[ \t]+0(?:\.0+)?[ \t\r]*$', 'top score')
-    ex = None
-    if exhaust:
-        try:
-            ex = int(exhaust.group(1))
-            if ex < 1: raise ValueError('must be positive')
-        except ValueError as exc:
-            raise ValueError(f'invalid exhaustiveness: {exhaust.group(1)}') from exc
-    score = float(mode.group(1)) if mode else None
-    if score is not None and not math.isfinite(score):
-        raise ValueError('nonfinite docking score')
-    return {'version': version.group(1) if version else None,
-            'center': xyz('Grid center'), 'size': xyz(r'Grid size\s*'),
-            'exhaustiveness': ex,
-            'seed': seed_number,
-            'best_score': score}
+        candidates=[x for x in lines if re.match(r'^'+label+r'(?:[ \t:]|$)',x)]
+        m=one(label,candidates,label+r'[ \t]*:[ \t]*X[ \t]*('+FLOAT+r')[ \t]+Y[ \t]*('+FLOAT+r')[ \t]+Z[ \t]*('+FLOAT+r')[ \t]*')
+        vals=tuple(map(float,m.groups())) if m else None
+        if vals is not None and not all(map(math.isfinite,vals)): raise ValueError('nonfinite '+label)
+        return vals
+    version=one('version',[x for x in lines if x.startswith('AutoDock Vina')],r'AutoDock Vina v([^ \t]+)[ \t]*')
+    exhaust=one('exhaustiveness',[x for x in lines if re.match(r'^Exhaustiveness(?:[ \t:]|$)',x)],r'Exhaustiveness:[ \t]*([0-9]+)[ \t]*')
+    seed=one('seed',[x for x in lines if 'random seed' in x],r'.*random seed:[ \t]*(-?[0-9]+)[ \t]*\).*')
+    mode=one('top score',[x for x in lines if re.match(r'^[ \t]*1(?:[ \t]|$)',x)],r'[ \t]*1[ \t]+('+FLOAT+r')[ \t]+0(?:\.0+)?[ \t]+0(?:\.0+)?[ \t]*')
+    ex=int(exhaust[1]) if exhaust else None
+    if ex is not None and ex<1: raise ValueError('nonpositive exhaustiveness')
+    score=float(mode[1]) if mode else None
+    if score is not None and not math.isfinite(score): raise ValueError('nonfinite score')
+    return {'version':version[1] if version else None,'center':xyz('Grid center'),
+            'size':xyz('Grid size'),'exhaustiveness':ex,'seed':int(seed[1]) if seed else None,'best_score':score}
 
 
 def hash_archive_streaming(archive):
@@ -338,6 +312,12 @@ def main(archive, out, expected_version='1.2.7'):
                 # Flagged for review; reuse may be intentional, not a scientific defect.
                 issue('DUPLICATE_SEED_REVIEW', ';'.join(ids), seed)
 
+        for entry in entries:
+            ident=entry['system']+'/'+entry['ligand']
+            related=[f for f in failures if f['sample']==entry['ligand'] or ident in f['sample'].split(';')]
+            check_keys=('version_expected','seed_present','config_center','config_size','exhaustiveness','log_vs_pose_score','log_vs_summary_score','pose_exists')
+            entry['run_disposition']='PASS' if all(entry[k]=='PASS' for k in check_keys) and not related else 'FAIL'
+
         if not entries:
             issue('NO_AUDITABLE_RUNS', archive.name, 'No input ligands or summary compounds detected')
         with (out / 'run_audit.csv').open('w', newline='', encoding='utf-8') as f:
@@ -357,14 +337,12 @@ def main(archive, out, expected_version='1.2.7'):
         summary = {'source_archive': archive.name, 'source_archive_sha256': hash_archive_streaming(archive),
                    'expected_version': expected_version, 'archive_files': len(manifest),
                    'ligands': len(ligs), 'expected_primary_runs': len(ligs) * len(GROUPS),
-                   'verified_primary_runs': sum(1 for x in entries if all(x[key] == 'PASS' for key in (
-                       'version_expected', 'seed_present', 'config_center', 'config_size', 'exhaustiveness',
-                       'log_vs_pose_score', 'log_vs_summary_score', 'pose_exists'))),
+                   'verified_primary_runs': sum(x['run_disposition']=='PASS' for x in entries),
                    'failures': len(failures), 'failed_checks': failures,
                    'version_counts': dict(Counter(str(x['version']) for x in entries)),
                    'distinct_seeds': len(observed_seeds), 'config': cfg,
-                   'script_uses_external_binaries': 'vina --receptor' in script,
-                   'script_contains_fixed_seed': '--seed' in script,
+                   'script_contains_vina_invocation_text': 'vina --receptor' in script,
+                   'script_contains_seed_option_text': '--seed' in script,
                    'csv_rows': len(rows)}
         (out / 'audit_summary.json').write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
         return summary

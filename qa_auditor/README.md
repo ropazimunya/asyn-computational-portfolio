@@ -1,32 +1,29 @@
-# Python scientific-record consistency demonstration
+# Scientific Record Consistency Demonstration
 
-A research QA/QC proof-of-concept Python auditor for **synthetic Vina-style ZIP records**. The demonstration tests whether selected configuration, docking-log, pose-score, input-inventory and summary fields are consistent. It does **not** run molecular docking or analyze original biological outputs.
+Python 3.9+ and the standard library are required. The tested runtime is recorded in the [validation report](VALIDATION_REPORT.md). No Vina, OpenMM, molecular data or network access is needed.
 
-## Requirements
-Python 3.9+; standard library only. Run the following commands from the repository root.
+## Run all verification
+
+From the repository root:
 
 ```bash
-python3 qa_auditor/validation/compare_versions.py
-python3 qa_auditor/tests/independent_tests.py qa_auditor/validation
-python3 qa_auditor/tests/additional_hardening_tests.py
-python3 qa_auditor/tests/reviewer_round4_tests.py
-python3 qa_auditor/tests/reviewer_round5_tests.py
-python3 qa_auditor/tests/reviewer_round6_tests.py
+python3 tools/run_validation.py
 ```
 
-`python3` invokes the Python interpreter; each path identifies a synthetic test script. The independent test script also takes `qa_auditor/validation` as the location of the auditor modules. These scripts generate temporary synthetic inputs; some write generated reports under the same source tree. They should not be run on unpublished research data for this portfolio demo.
+`python3` starts Python. `tools/run_validation.py` runs the supplied suites and focused report-integrity tests, records actual exit statuses and writes a generated execution summary under qa_auditor/generated. It returns nonzero if an asserted expectation fails. Three historical cases remain REVIEW and are reported separately, not converted into passes.
 
-## Contents
+## Audit a compatible synthetic archive
 
-- `validation/audit_workflow.py`: baseline logic.
-- `validation/audit_workflow_v2.py`: updated consistency checks.
-- `validation/compare_versions.py`: comparison of baseline and updated behavior using synthetic cases.
-- `validation/validate_injected_faults.py`: synthetic fixture generation and test cases.
-- `tests/`: independently structured regression and hardening scenarios.
+```bash
+python3 qa_auditor/validation/audit_workflow_v2.py example.zip audit_output --expected-version 1.2.7
+```
 
-## Professional quality-control connection
+`python3` invokes Python. The script path selects the revised auditor; `example.zip` is the input archive; `audit_output` is a new report directory; `--expected-version 1.2.7` sets the comparison version. The command checks records without performing docking. Exit 1 requests inspection of recorded discrepancies or review flags.
 
-See [Chunk B](../portfolio/B_quality_assurance_control.md) for the requirements, corrective control, and test-evidence mapping behind this demonstration. The checks detect record inconsistencies within designed synthetic fixtures and do not constitute a regulated software-validation package.
+[Input layout, policies and limitations](INPUT_SPECIFICATION.md) · [Case B](../portfolio/B_quality_assurance_control.md)
 
-## Scope
-These scripts are specialized to a particular Vina-style ZIP naming convention and are not a general archival validation platform. Passing tests supports their behavior on defined synthetic cases only. It does not prove a predicted pocket, binding affinity or long-term stabilization.
+## Historical baseline
+
+validation/audit_workflow.py and validate_injected_faults.py preserve the weaker baseline demonstration. Running the baseline-only harness returns 1 because it misses four of the thirteen planted faults. This expected historical result is not failure of the revised auditor. The baseline must not be used as the recommended checker.
+
+The tests with review-round names retain historical regression lineage. They are bundled software tests, not institutional approval or independent scientific validation. Several share fixture code; their scenario counts overlap.

@@ -1,0 +1,227 @@
+{
+  "source_archive_sha256": "acd19d672d1d464d60f8d3fd5ad1b38c7d1bacede1b55ae4a9114c3eb7c5437c",
+  "mode": "read-only record consistency comparison; no docking",
+  "primary_records": 24,
+  "score_agreements": 24,
+  "all_selected_settings_agree": true,
+  "additional_out_log_included": false,
+  "corrected_ligand_digest_matches_historical_report": true,
+  "records": [
+    {
+      "system": "wt",
+      "record": "anle138b",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "anle138b",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "baicalein",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "baicalein",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "caffeine",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "caffeine",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "curcumin",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "curcumin",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "egcg",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "egcg",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "fasudil",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "fasudil",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "fisetin",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "fisetin",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "gallic_acid",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "gallic_acid",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "resveratrol",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "resveratrol",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "rosmarinic_acid",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "rosmarinic_acid",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "squalamine",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "squalamine",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "wt",
+      "record": "synuclean_d",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    },
+    {
+      "system": "a53t",
+      "record": "synuclean_d",
+      "score_consistent": true,
+      "version_expected": true,
+      "exhaustiveness_config_agreement": true,
+      "center_config_agreement": true,
+      "size_config_agreement": true
+    }
+  ]
+}

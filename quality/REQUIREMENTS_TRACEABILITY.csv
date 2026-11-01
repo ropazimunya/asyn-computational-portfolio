@@ -1,0 +1,10 @@
+requirement_id,requirement,implementation,verification,evidence
+Q01,Identify missing or ambiguous archive records,qa_auditor/validation/audit_workflow_v2.py,Historical missing-record and duplicate ZIP cases,evidence/validation/execution_summary.json
+Q02,Reject recognized malformed and repeated log fields,qa_auditor/validation/audit_workflow_v2.py,Focused T01-T04 and coordinate regressions,evidence/validation/portfolio_integrity_results.json
+Q03,Do not verify a run with a linked blocking exception,qa_auditor/validation/audit_workflow_v2.py,Focused T05,evidence/validation/portfolio_integrity_results.json
+Q04,Label script indicators as text occurrence only,qa_auditor/validation/audit_workflow_v2.py,Focused T06,evidence/validation/portfolio_integrity_results.json
+Q05,Document input scope and numerical policies,qa_auditor/INPUT_SPECIFICATION.md,Documentation and link checks,qa_auditor/VALIDATION_REPORT.md
+Q06,Report consistent exception and source records,qa_auditor/validation/audit_workflow_v2.py,Focused report and hash assertions,evidence/validation/portfolio_integrity_results.json
+S01,Do not endorse methods contradicted by records,quality/INVESTIGATION_001.md,Source record comparison,evidence/scientific_source_verification.json
+S02,Withhold unsupported original MD stability interpretation,portfolio/C_molecular_modeling.md,Claim assessment,evidence/CLAIM_EVIDENCE_MATRIX.csv
+S03,Separate software grant from scientific source rights,CONTENT_RIGHTS.md,Distribution inventory and source boundaries,evidence/SOURCE_REGISTER.md

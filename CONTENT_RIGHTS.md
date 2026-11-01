@@ -1,32 +1,13 @@
 # Content Rights and Attribution
 
-## Python QA/QC Software
+## Software
 
-The MIT License in `qa_auditor/LICENSE` is intended to apply
-to the original Python software in `qa_auditor/`, only to the
-extent that the repository owner has the rights to license it.
+The Python software files under qa_auditor and the Python verification utilities under tools are distributed under the MIT License in [qa_auditor/LICENSE](qa_auditor/LICENSE). The GitHub Actions workflow is included in the same software license scope. Repository prose, case studies, scientific interpretations and evidence records are excluded from that license; no general reuse license is granted for those materials.
 
-Authorship, third-party contributions, and attribution must be
-confirmed before public release.
+The software was adapted from the repository supplied by the portfolio owner and revised with AI assistance. Historical baseline and fixture files are identified in the [software provenance record](docs/SOFTWARE_PROVENANCE.md). This records the inspected origin and modifications; it does not claim an independent forensic determination of authorship or third-party copyright clearance. No additional third-party application source was intentionally imported for this edition. Python standard-library dependencies are used, not bundled.
 
-## Scientific Case Studies and Documentation
+## Scientific sources
 
-The portfolio case studies, research descriptions, and
-scientific documentation are not covered by the MIT License.
+The original scientific ZIP, manuscript, AlphaFold structures, molecular docking poses, raw scientific tables, trajectories and figures are not included. Source hashes and narrative descriptions identify the inspected private records. Omission does not retroactively authorize historical use or establish legal clearance. AlphaFold Server outputs and derivatives remain subject to their applicable terms; the general MIT grant for QA software does not relicense them.
 
-No general reuse license is granted for this material.
-
-## Original Research Data
-
-Original AlphaFold structures, molecular docking outputs,
-simulation trajectories, and restricted research records
-are not included in this portfolio.
-
-Any third-party materials remain subject to their own terms.
-
-## Research Scope
-
-The computational research is exploratory. The software
-demonstrations do not constitute experimental confirmation
-of ligand binding, molecular stabilization, or regulatory
-validation.
+The public case studies communicate bounded historical activities, software testing and retrospective educational reasoning. The receptor-origin conflict and incomplete molecular reproducibility record remain stated limitations. No institutional, Google, FDA or other third-party endorsement is claimed.

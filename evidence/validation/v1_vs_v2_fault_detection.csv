@@ -1,0 +1,15 @@
+case,expected_alert,v1_detected,v2_detected,v1_failures,v2_failures,v2_types,v2_status
+baseline_clean,False,False,False,0,0,,PASS
+log_score_changed,True,True,True,2,2,CHECK_FAILED,PASS
+pose_score_changed,True,True,True,1,1,CHECK_FAILED,PASS
+summary_score_changed,True,True,True,1,1,CHECK_FAILED,PASS
+grid_center_changed,True,True,True,1,1,CHECK_FAILED,PASS
+grid_size_changed,True,True,True,1,1,CHECK_FAILED,PASS
+exhaustiveness_changed,True,True,True,1,1,CHECK_FAILED,PASS
+log_missing,True,True,True,1,8,CHECK_FAILED;MISSING_LOG,PASS
+pose_missing,True,True,True,2,3,CHECK_FAILED;MISSING_POSE,PASS
+log_best_score_missing,True,True,True,2,2,CHECK_FAILED,PASS
+seed_missing,True,False,True,0,1,CHECK_FAILED,PASS
+version_changed,True,False,True,0,1,CHECK_FAILED,PASS
+seed_duplicated,True,False,True,0,1,DUPLICATE_SEED_REVIEW,PASS
+ligand_file_missing,True,False,True,0,1,MISSING_LIGAND_INPUT,PASS

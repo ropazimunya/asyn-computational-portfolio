@@ -1,0 +1,21 @@
+baseline_clean v1 False v2 False PASS
+log_score_changed v1 True v2 True PASS
+pose_score_changed v1 True v2 True PASS
+summary_score_changed v1 True v2 True PASS
+grid_center_changed v1 True v2 True PASS
+grid_size_changed v1 True v2 True PASS
+exhaustiveness_changed v1 True v2 True PASS
+log_missing v1 True v2 True PASS
+pose_missing v1 True v2 True PASS
+log_best_score_missing v1 True v2 True PASS
+seed_missing v1 False v2 True PASS
+version_changed v1 False v2 True PASS
+seed_duplicated v1 False v2 True PASS
+ligand_file_missing v1 False v2 True PASS
+{
+  "cases": 14,
+  "introduced_faults": 13,
+  "v1_detected_faults": 9,
+  "v2_detected_faults": 13,
+  "v2_passes": 14
+}

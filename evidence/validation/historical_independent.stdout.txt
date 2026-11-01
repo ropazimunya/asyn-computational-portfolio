@@ -1,0 +1,37 @@
+ID  v1            v2            exc.csv(v1/v2)  description
+C1  SILENT        SILENT        T/T             Clean, 3 ligands, different grid/exhaustiveness/seeds  [expected: SILENT]
+C2  SILENT        SILENT        T/T             Clean, CRLF line endings in logs  [expected: SILENT]
+C3  SILENT        SILENT        T/T             Clean, seed value 0 and negative seed  [expected: SILENT]
+C4  SILENT        SILENT        T/T             Clean, numerically-equal formatting (log prints 24.0 / -3.50 vs config 20 / -3.5)  [expected: SILENT]
+C5  CRASH(KeyError)SILENT        F/T             Clean, config file has an inline comment on one line  [expected: SILENT]
+C6  CRASH(KeyError)SILENT        F/T             Clean, summary CSV saved by Excel (UTF-8 BOM)  [expected: SILENT]
+C7  SILENT        ALERT(6)      T/T             Clean data but run produced with Vina v1.2.5 (legit different version)  [expected: SILENT (policy-dependent)]
+C8  SILENT        SILENT        T/T             Clean, log prints 1 decimal (-6.1) while pose/summary print 3 (-6.100)  [expected: SILENT]
+F1  SILENT        ALERT(2)      T/T             Orphan result files (cmpd9) with no input and no summary row  [expected: ALERT]
+F2  ALERT(1)      ALERT(1)      T/T             Duplicate summary row for cmpd1 with CONFLICTING score (appended after correct row)  [expected: ALERT]
+F2b SILENT        ALERT(2)      T/T             Same, but conflicting row placed BEFORE the correct row  [expected: ALERT]
+F3  CRASH(ValueError)ALERT(2)      F/T             Empty score cell in summary CSV  [expected: ALERT (graceful)]
+F4  CRASH(ValueError)ALERT(2)      F/T             Non-numeric score ("N/A") in summary CSV  [expected: ALERT (graceful)]
+F5  CRASH(KeyError)ALERT(7)      F/T             Summary CSV missing the A53T column  [expected: ALERT (graceful)]
+F6  ALERT(1)      ALERT(1)      T/T             Pose file: model 1 mismatches log, model 2 equals log  [expected: ALERT]
+F7  ALERT(2)      ALERT(2)      T/T             Pose files swapped between cmpd1 and cmpd2 (different scores)  [expected: ALERT]
+F8  ALERT(3)      ALERT(6)      T/T             Entire results_a53t folder missing  [expected: ALERT]
+F9  CRASH(IndexError)ALERT(48)     F/T             ALL logs missing (nothing auditable) -> should report exceptions, not crash  [expected: ALERT (graceful)]
+F10 SILENT        ALERT(1)      T/T             Version line absent from one log  [expected: ALERT]
+F11 ALERT(1)      ALERT(1)      T/T             Exhaustiveness line absent from one log  [expected: ALERT]
+F12 ALERT(1)      ALERT(1)      T/T             Grid center X/Z transposed in one log  [expected: ALERT]
+F13 CRASH(KeyError)ALERT(7)      F/T             Config missing exhaustiveness key  [expected: ALERT (graceful)]
+F14 SILENT        ALERT(1)      T/T             Three runs share one seed  [expected: ALERT]
+F15 ALERT(2)      ALERT(10)     T/T             Duplicate ZIP member: second copy of cmpd1.log (altered score) appended  [expected: ALERT]
+F16 SILENT        SILENT        T/T             Score tolerance: log differs from pose by 0.0009 (within 0.001)  [expected: SILENT]
+F17 ALERT(2)      ALERT(2)      T/T             Score tolerance: log differs from pose by 0.0020  [expected: ALERT]
+F18 SILENT        SILENT        T/T             KNOWN LIMIT: score altered identically in log+pose+summary (consistent tampering)  [expected: SILENT (by design)]
+F15bSILENT        ALERT(10)     T/T             Duplicate ZIP member: TAMPERED copy first, clean copy last (zipfile returns last)  [expected: ALERT]
+C9  ALERT(2)      ALERT(2)      T/T             Clean: log prints 1 decimal (-6.1) vs pose/summary 3 decimals (-6.147) [CONDITIONAL: unverified vs real Vina]  [expected: SILENT]
+INDEPENDENT TEST ASSESSMENT: {'PASS': 26, 'REVIEW': 3, 'FAIL': 0}
+
+parse_log() timing on a log padded with N whitespace-only lines (no match present):
+  N=  5000    0.012 s
+  N= 10000    0.018 s
+  N= 20000    0.031 s
+  N= 40000    0.060 s

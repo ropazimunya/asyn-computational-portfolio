@@ -1,0 +1,14 @@
+PASS clean
+PASS T01_bad_repeated_top_score
+PASS T02_empty_repeated_version
+PASS T03_empty_repeated_exhaustiveness
+PASS T04_empty_repeated_seed
+PASS T05_invalid_secondary_pose
+PASS T06_comment_text
+PASS T07_empty_ligand_presence_only
+PASS T08_crlf_clean
+PASS T09_malformed_csv
+PASS T10_duplicate_member
+PASS T11_corrupt_archive
+PASS T12_duplicate_summary_header
+RESULT 13 / 13

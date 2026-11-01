@@ -1,31 +1,27 @@
-# B | Quality Assurance, Quality Control & Data Integrity
+# B Quality Assurance Quality Control and Data Integrity
 
-**Target capability:** QA Associate, QC Analyst, Quality Systems Associate, Research Informatics.
+## Quality objective
 
-## Problem and quality objective
+Check selected scientific records for completeness and internal consistency before using them in a methods narrative. The public demonstration uses synthetic Vina-style text, not molecular calculations.
 
-Scientific results may be reported from records that disagree on settings, best scores, seeds, software versions or input inventories. The quality objective was to check **internal record consistency**, identify exception types and verify that software changes actually detect deliberately introduced faults.
-
-## Requirements-to-evidence demonstration
-
-| Quality requirement | Observable control in the Python demonstration | Evidence |
+| Requirement | Implemented control | Verification |
 | --- | --- | --- |
-| Records are complete | Identify missing log, pose or ligand-input items | [Auditor implementation](../qa_auditor/validation/audit_workflow_v2.py) |
-| Critical metadata remain traceable | Compare seeds, software version and configuration fields | [Synthetic fault cases](../qa_auditor/validation/validate_injected_faults.py) |
-| Scores are internally consistent | Compare score data among log, pose and summary records | [Version comparison](../qa_auditor/validation/compare_versions.py) |
-| Quality changes are verified | Re-run baseline and updated controls against identical injected faults | [Test suite](../qa_auditor/README.md) |
-| Exceptions are reported | Return discrete failed checks rather than quietly accepting mismatches | [Updated auditor](../qa_auditor/validation/audit_workflow_v2.py) |
+| Required records are available | Cross-check ligand inventory, logs, poses and summary rows | Missing-record and orphan-result tests |
+| Recognized fields are unambiguous | Identify labeled fields before full syntax validation | Malformed and repeated metadata tests |
+| Selected scores agree | Compare first-ranked log, pose and summary values | Mismatch and rounding-boundary tests |
+| Exceptions affect disposition | Link run-specific errors to run status | Invalid-secondary-pose test |
+| Reports remain traceable | Source/member hashes and CSV/JSON consistency | Independent output assertions |
 
-## Demonstrated improvement: detect, correct, verify
+The historical baseline detects 9 of 13 planted faults. The revised checker detects all 13; the same clean control is unflagged. The baseline is preserved for educational comparison, not recommended as the operational checker.
 
-**Observation:** In the original synthetic comparison, the baseline checker detected **9 of 13** deliberately injected faults. It missed defined seed/version/input-inventory scenarios.
+## Worked investigation
 
-**Corrective control:** The updated checker added checks addressing those gaps.
+[Investigation 001](../quality/INVESTIGATION_001.md) compares a manuscript's stated docking settings with the available execution records. A separate independent parser checks all 24 original first-ranked score records for internal agreement. No molecular docking is executed.
 
-**Verification:** Re-running the same 13 faulty cases showed **13/13 detected**, while the clean control remained unflagged (**1/1**). The comparison script and tests are included and executable here. These numbers describe specific designed test cases, **not** a validated sensitivity estimate for real scientific archives.
+## Corrective controls and verification
 
-## Professional QA/QC methods demonstrated
+Later testing identified malformed repeated fields, incorrect verified-run counting and script metadata that inferred too much from string matches. The current code rejects recognized malformed fields, excludes a run with a linked blocking exception from the verified count and labels script indicators as text occurrence only. [Validation results](../qa_auditor/VALIDATION_REPORT.md) give executed outcomes, including unresolved policy cases.
 
-Requirements mapping, automated verification, exception classification, regression testing, test-evidence traceability, change verification and appropriate separation of factual observation from inference.
+## Professional boundary
 
-**Scope:** This is a *research software quality-control demonstration*. It is not evidence of completed GMP validation, formal CAPA closure under a regulated QMS, or certification of an analytical method. Historical docking consistency observations are omitted because source records are not in this public package.
+This demonstrates requirements mapping, QC checks, discrepancy investigation, corrective controls and verification. It is not a completed regulated CAPA, analytical-method validation or GMP qualification. The [corrective-action record](../quality/CORRECTIVE_ACTION_LOG.csv) keeps software verification separate from unresolved scientific provenance and molecular validity.

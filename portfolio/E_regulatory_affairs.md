@@ -1,35 +1,27 @@
-# E | Regulatory Affairs & Research Compliance: Context-of-Use Exercise
+# E Regulatory Affairs and Evidence Assessment
 
-**Target capability:** Regulatory Affairs Associate, Quality Systems, regulatory documentation analysis.
+## Intended use before claims
 
-## Regulatory question
+This repository is educational research software and professional documentation. It is not offered for diagnosis, treatment selection or a medical-device submission. No FDA classification or pathway is asserted. A future regulated use would require its own product definition, intended use, applicable requirements and evidence plan.
 
-What changes if exploratory α-synuclein computational findings are discussed as scientific hypotheses versus being proposed for a regulated diagnostic, drug-development or clinical decision-making context?
+## Worked claim assessment E01
 
-This is a **hypothetical gap-analysis exercise**, not an actual FDA filing or regulated product project. No particular device classification, clearance pathway, intended use, safety or effectiveness claim is asserted for this research.
+**Proposed statement:** “The auditor validates molecular docking results.”
 
-## Claims-to-evidence and documentation assessment
+**Evidence:** synthetic files, selected field comparisons, designed fault detection and report checks. No real docking rerun, biological reference standard, binding experiment or clinical performance study is provided.
 
-| Proposed communication | Evidence currently represented here | Regulatory-oriented disposition |
+**Assessment:** the proposed statement exceeds the evidence. **Accepted statement:** “The auditor detects defined inconsistencies in documented synthetic Vina-style records.” **Traceability:** requirement Q02, risk R03, corrective action CA01 and the focused software tests. **Remaining gap:** real-format coverage and evidence authenticity are outside the current demonstration.
+
+## Future regulated-use gap assessment
+
+| Topic | Evidence here | Additional assessment for an actual regulated product |
 | --- | --- | --- |
-| “Exploratory comparison of predicted WT/A53T models” | Descriptive historical model-analysis summary | Suitable as qualified computational research language |
-| “Docking establishes ligand activity or disease modification” | No experimental binding or functional evidence in this portfolio | Do not make this claim |
-| “A synthetic QA script detects defined inconsistent records” | Included source code and designed test cases | State exact tested input scope; do not imply regulated software validation |
-| “The workflow is ready for clinical diagnostic use” | No clinical intended use, analytical/clinical validation or risk-control evidence | Unsupported; requires a distinct product-specific regulatory assessment |
+| Intended use | Educational consistency demonstration | Specific user, decision, product and setting |
+| Requirements | Research-level schema and synthetic checks | Applicable product requirements and controlled traceability |
+| Verification | Executed software regressions | Risk-appropriate verification for intended use |
+| Validation | No biological or clinical validation | Relevant performance evidence for the actual claims |
+| Records and change control | Retrospective portfolio records and source hashes | Applicable controlled processes and responsibilities |
 
-## Example regulatory evidence checklist
+FDA's 2023 computational-model credibility guidance addresses models used in medical-device submissions. Its context-of-use and risk-informed reasoning is useful educationally; it does not make this auditor FDA-validated or establish a device pathway. ICH Q9(R1) addresses pharmaceutical quality risk management and is likewise a reference, not a claimed compliance standard for this project.
 
-| Information needed for a future regulated intended use | Portfolio status |
-| --- | --- |
-| Defined product type and intended-use statement | Not established |
-| Applicable regulatory jurisdiction and pathway analysis | Must be determined for an actual product |
-| Design and software requirements with traceability | Not provided as regulated design-control documentation |
-| Analytical or technical performance and reproducibility | Synthetic auditor tests only; no regulated performance validation |
-| Clinical performance and benefit-risk evidence when applicable | Not provided |
-| Configuration management, change control and controlled records | Research-level examples only |
-
-## Regulatory reasoning demonstrated
-
-Scope an intended use before selecting requirements; separate exploratory evidence from product claims; identify documentation gaps; link test evidence to specific requirements; and recognize when further verification, validation and regulatory consultation would be necessary.
-
-**Boundary:** Regulatory familiarity and an illustrative gap analysis are shown here. The project has not been evaluated as FDA-compliant, and this exercise does not substitute for a device-specific regulatory strategy, formal quality-system implementation or regulatory submission.
+[Official references](../docs/REFERENCES.md) · [Claim matrix](../evidence/CLAIM_EVIDENCE_MATRIX.csv) · [Scientific risk register](../risk/SCIENTIFIC_RISK_REGISTER.csv)

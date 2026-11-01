@@ -1,0 +1,6 @@
+PASS clean exit 0 reports True findings []
+PASS valid_then_malformed_center exit 1 reports True findings ['CHECK_FAILED', 'INVALID_LOG']
+PASS valid_then_valid_center exit 1 reports True findings ['CHECK_FAILED', 'INVALID_LOG']
+PASS malformed_single_size exit 1 reports True findings ['CHECK_FAILED', 'INVALID_LOG']
+PASS valid_then_malformed_size exit 1 reports True findings ['CHECK_FAILED', 'INVALID_LOG']
+RESULT 5/5

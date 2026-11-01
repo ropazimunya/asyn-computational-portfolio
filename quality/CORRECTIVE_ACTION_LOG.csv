@@ -1,0 +1,8 @@
+action_id,requirement,finding,action,verification,status,remaining_limit
+CA01,Q02,Malformed repeated metadata accepted,Label-first complete-field parsing,Focused CLI tests T01-T04,Verified on synthetic cases,Unsupported labels and real-format coverage remain bounded
+CA02,Q03,Run with INVALID_POSE counted as verified,Link run exceptions to disposition,Focused CLI test T05,Verified on synthetic case,Global archive disposition separate
+CA03,Q04,Comment text implied executable behavior,Rename metadata to text-occurrence indicators,Focused test T06,Verified on synthetic case,No shell execution analysis
+CA04,Q05,Policies insufficiently documented,Add input specification and validation report,Link and content checks,Implemented,Not real-world format validation
+CA05,S01,Manuscript settings conflict with logs,Retain discrepancy investigation; avoid verified manuscript claim,24 record score comparisons; Investigation 001,Assessment recorded,Underlying narrative-error cause unresolved
+CA06,S02,Historical MD input error reported,Withhold original MD stability interpretation,Claim matrix and Case C,Restriction recorded,Raw reconstruction cannot be independently verified
+CA07,S03,Source terms and provenance unresolved,Exclude molecular artifacts and structural datasets,Package inventory and rights notice,Distribution boundary implemented,Historical-use permission not established

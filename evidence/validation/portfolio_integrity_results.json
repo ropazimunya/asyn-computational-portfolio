@@ -1,0 +1,160 @@
+[
+  {
+    "case": "clean",
+    "expected_exit": 0,
+    "observed_exit": 0,
+    "expected_issue": null,
+    "observed_issues": [],
+    "verified_primary_runs": 2,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T01_bad_repeated_top_score",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "INVALID_LOG",
+    "observed_issues": [
+      "CHECK_FAILED",
+      "INVALID_LOG"
+    ],
+    "verified_primary_runs": 1,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T02_empty_repeated_version",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "INVALID_LOG",
+    "observed_issues": [
+      "CHECK_FAILED",
+      "INVALID_LOG"
+    ],
+    "verified_primary_runs": 1,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T03_empty_repeated_exhaustiveness",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "INVALID_LOG",
+    "observed_issues": [
+      "CHECK_FAILED",
+      "INVALID_LOG"
+    ],
+    "verified_primary_runs": 1,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T04_empty_repeated_seed",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "INVALID_LOG",
+    "observed_issues": [
+      "CHECK_FAILED",
+      "INVALID_LOG"
+    ],
+    "verified_primary_runs": 1,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T05_invalid_secondary_pose",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "INVALID_POSE",
+    "observed_issues": [
+      "INVALID_POSE"
+    ],
+    "verified_primary_runs": 1,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T06_comment_text",
+    "expected_exit": 0,
+    "observed_exit": 0,
+    "expected_issue": null,
+    "observed_issues": [],
+    "verified_primary_runs": 2,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T07_empty_ligand_presence_only",
+    "expected_exit": 0,
+    "observed_exit": 0,
+    "expected_issue": null,
+    "observed_issues": [],
+    "verified_primary_runs": 2,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T08_crlf_clean",
+    "expected_exit": 0,
+    "observed_exit": 0,
+    "expected_issue": null,
+    "observed_issues": [],
+    "verified_primary_runs": 2,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T09_malformed_csv",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "INVALID_CSV",
+    "observed_issues": [
+      "CHECK_FAILED",
+      "INVALID_CSV",
+      "INVALID_SUMMARY_SCORE",
+      "MISSING_SUMMARY_ROW"
+    ],
+    "verified_primary_runs": 0,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T10_duplicate_member",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "DUPLICATE_ARCHIVE_MEMBER",
+    "observed_issues": [
+      "AMBIGUOUS_ARCHIVE_MEMBER",
+      "CHECK_FAILED",
+      "DUPLICATE_ARCHIVE_MEMBER",
+      "MISSING_LOG"
+    ],
+    "verified_primary_runs": 1,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T11_corrupt_archive",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "INVALID_ARCHIVE",
+    "observed_issues": [
+      "INVALID_ARCHIVE"
+    ],
+    "verified_primary_runs": 0,
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "case": "T12_duplicate_summary_header",
+    "expected_exit": 1,
+    "observed_exit": 1,
+    "expected_issue": "DUPLICATE_CSV_HEADER",
+    "observed_issues": [
+      "DUPLICATE_CSV_HEADER"
+    ],
+    "verified_primary_runs": 2,
+    "pass": true,
+    "detail": ""
+  }
+]

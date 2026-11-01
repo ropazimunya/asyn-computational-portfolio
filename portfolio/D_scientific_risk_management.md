@@ -1,29 +1,29 @@
-# D | Scientific Risk Assessment & Risk Management
+# D Scientific Risk Assessment and Risk Management
 
-**Target capability:** Quality Risk Management, Quality Systems, scientific evidence governance.
+## Context of use
 
-## Decision context
+Decide what a public research portfolio may credibly communicate. This is a retrospective educational scientific-risk assessment, not patient-safety analysis, ISO 14971 implementation or a pharmaceutical QMS assessment.
 
-**Context of use:** Decide whether computational outputs are appropriate to communicate as exploratory research and whether each proposed statement is proportionate to supporting evidence. This is **not** an assessment of patient safety or a regulated product hazard analysis.
+## Worked risk R03
 
-## Public-facing risk-control examples
+**Failure mode:** a malformed repeated execution field is ignored and a record appears acceptable. **Consequence:** incorrect settings or an ambiguous score may be repeated in a methods narrative. **Initial priority:** high, because it directly affects record interpretation and had a demonstrated software escape. Priorities are qualitative screening judgments; no numeric failure probability is assigned.
 
-The table demonstrates risk-based analysis without reproducing the private project risk register. **Qualitative priorities are illustrative screening judgments**, not validated probabilities.
+**Control:** identify all recognized occurrences, reject malformed or repeated fields, and persist the exception. **Verification:** the focused portfolio tests mutate score, version, exhaustiveness and seed records and assert nonzero CLI status, expected issue category, CSV/JSON agreement and affected-run disposition. Exact outcomes are in the [validation report](../qa_auditor/VALIDATION_REPORT.md).
 
-| Risk scenario | Potential consequence | Mitigation / control | Evidence needed before stronger claims |
-| --- | --- | --- | --- |
-| Low-confidence predicted dimer interface | Treating one predicted configuration as physiological | Compare model ensemble; explicitly report confidence and variability | Orthogonal structural or biochemical evidence |
-| Model-selection dependence | Apparent differences driven by selected predicted model | Model-wise contact assessment and sensitivity analyses | Independent conformations and robust sensitivity checks |
-| Inconsistent computational execution records | Unsupported methods narrative or untraceable scores | Automated checks of settings, inputs, logs, poses and summaries | Reproducible source records and independent rerun |
-| Short, limited MD sampling | Overinterpreting transient contacts as stabilization | Report sampled timescale, controls, replicates and uncertainty | Appropriate extended sampling, replicates and experimental evidence |
-| Unsupported regulatory or therapeutic language | Misleading readers about the study's intended use | Claim-to-evidence review and nonclinical scope statement | Suitable analytical, preclinical and regulatory evidence for the claimed use |
+**Residual risk:** synchronized changes across all record sources can still pass a consistency check. Hashes identify the submitted bytes but cannot prove original execution or prevent coordinated fabrication. **Disposition:** acceptable for a narrowly described synthetic consistency demonstration; unsuitable as proof of biological validity or comprehensive provenance.
 
-## Risk-management workflow demonstrated
+## Control decisions across the project
 
-**Define context → identify failure modes → evaluate consequences and uncertainty → select controls → verify control performance → communicate remaining limitations.**
+| Risk | Control | Disposition |
+| --- | --- | --- |
+| Model-selection dependence | Ensemble interpretation and sensitivity disclosure | Historical observation; no stability claim |
+| Methods versus execution mismatch | Record comparison and explicit investigation | Conflicting methods are not carried forward as verified |
+| Ligand mapping error | Withhold original MD stability interpretation | Scientific validity remains unresolved |
+| Software overclaims | Defect-specific regression checks and report assertions | Tested behavior only |
+| Source-use restrictions | Keep molecular artifacts outside public package | No legal clearance inferred from omission |
 
-The concrete verification example is [Chunk B](B_quality_assurance_control.md): testing designed faults before and after a software control improvement. This supports detection within the synthetic scenario; it does not erase all downstream scientific uncertainty. Risk disposition remains a **context-specific professional judgment** rather than a universal PASS/FAIL rating.
+The [risk register](../risk/SCIENTIFIC_RISK_REGISTER.csv) identifies evidence, control, status and residual uncertainty. Software control verification is completed for the tested fixtures; molecular provenance and generalization to real archives remain separate limitations.
 
-## Limitations
+## Reference framework
 
-This is a portfolio reconstruction of risk-based reasoning from the historical project, not the entire 13-item private register. There are no calibrated likelihoods, prospective risk thresholds, formal ISO 14971 implementation, GxP sign-off or regulatory acceptance claims.
+ICH Q9(R1) provides pharmaceutical quality-risk-management principles. It informs this educational emphasis on context, uncertainty and controls; this portfolio does not claim implementation of that guidance. [Reference](../docs/REFERENCES.md)

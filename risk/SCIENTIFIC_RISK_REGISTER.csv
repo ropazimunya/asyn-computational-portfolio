@@ -1,0 +1,10 @@
+risk_id,scenario,priority,control,evidence,residual_uncertainty,disposition
+R01,Predicted dimer mistaken for physiological assembly,High,Confidence and ensemble limitations,Case A,Complete raw ensembles unavailable,Historical hypothesis only
+R02,Method narrative differs from records,High,Investigate records and qualify narrative,Investigation 001,Cause and provenance unresolved,No manuscript-method endorsement
+R03,Malformed execution fields accepted,High,Validate labels and full syntax,CA01; Q02; T01-T04,Real formats and coordinated changes,Accept narrow synthetic use
+R04,Invalid pose counted as verified,High,Run-specific disposition,CA02; T05,Global audit outcome distinct,Accept tested reporting behavior
+R05,MD geometry error supports stability claim,High,Withhold interpretation,Case C; C04,Faulty input and trajectories absent,Stability claim excluded
+R06,Synthetic sensitivity generalized,Medium,Describe designed cases and REVIEW outcomes,Validation report,No field accuracy estimate,Limit claim to fixtures
+R07,Text match mistaken for execution evidence,Medium,Text-occurrence field names,CA03; T06,No shell semantics,Do not infer execution
+R08,Source materials redistributed without established terms,High,Exclude molecular data and derivatives; state boundary,Content rights,Historical permissions unresolved,No clearance claim
+R09,Educational exercise mistaken for FDA validation,High,Intended-use and claim assessment,Case E,No regulated product evidence,Educational context only

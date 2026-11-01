@@ -1,21 +1,21 @@
-# C | Molecular modeling, simulation workflow & interpretation
+# C Molecular Modeling and Scientific Interpretation
 
-**Target capability:** Computational research scientist, molecular modeling analyst.
+## Historical workflow
 
-## Question
+The scientific archive contains receptor and ligand preparation files, docking logs, pose files, summary tables and pocket-analysis records. It documents historical AutoDock Vina work and an OpenMM preparation investigation. The public portfolio does not execute docking or MD and does not distribute these molecular artifacts.
 
-What can a docking and short molecular-dynamics workflow legitimately tell us about proposed ligand interactions with a predicted A53T α-synuclein interface?
+## What has been checked
 
-## Historically documented research work
+A read-only independent parser compared the first-ranked score in each of 24 primary logs with the first pose-score remark and its summary entry. All 24 agreed numerically. This is a check of archived records, not an independent docking rerun or evidence of binding. The extra WT anle138b_out.log is outside the 24 primary records and remains separately classified.
 
-The private research records document AutoDock Vina-style docking, coordinate preparation, OpenMM system preparation and short A53T–anle138b bound and apo simulation workflows, including preparation/equilibration stages and interpretation of RMSD, RMSF and contact-related plots. AMBER14/TIP3P and OpenFF ligand parameterization appear in the project history.
+## Ligand-preparation investigation
 
-## Scientific assessment
+A historical reconstruction report identifies an atom-order/coordinate-mapping error in the original MD preparation. It reports correction through molecular-graph correspondence and checks of bond geometry and contacts. The supplied corrected ligand's checksum matches the report. That checksum establishes file identity, not chemical correctness or successful repair of a simulation.
 
-| Output | What it can support | What it cannot establish |
-| --- | --- | --- |
-| Docking scores/poses | A computationally scored candidate pose under a stated setup | Experimental binding affinity or inhibition |
-| Short MD trajectory | Local behavior within a model, force field and limited sampled time | Long-term stability, causality or therapeutic activity |
-| Structural figures | Visualization of a modeled contact or conformational feature | Independent experimental validation |
+The faulty input, trajectories and complete reconstruction scripts were not supplied. I therefore treat the geometry-error diagnosis and corrected-geometry measurements as historical findings, not independently reproduced findings. The same report states that the reconstructed pose did not overlap an fpocket cavity under its tested criterion; that conclusion also remains dependent on unavailable underlying cavity inputs.
 
-**Evidence boundary:** Original molecular inputs/outputs, full trajectories and complete reproducibility materials are not included here; these historical calculations are **not runnable from this public portfolio**. This page demonstrates documented workflow exposure and scientific interpretation, not a newly verified simulation result.
+## Scientific disposition
+
+The original MD-derived stability interpretation is withheld. Later comparative trajectories cannot be assumed to repair the earlier preparation issue: each system needs its own input lineage and verification. Short unreplicated trajectories cannot establish causal stabilization, residence time or therapeutic activity even if their preparation is sound.
+
+This case demonstrates workflow exposure, error recognition and impact assessment. [Investigation 001](../quality/INVESTIGATION_001.md) and the [claim matrix](../evidence/CLAIM_EVIDENCE_MATRIX.csv) distinguish independently checked records from historical reports.

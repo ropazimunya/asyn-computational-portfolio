@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Independent reviewer-origin tests bundled in this review candidate.
+"""Independent reviewer-origin tests bundled as historical regression coverage.
 Own fixture generator (3 ligands, different grid/seed/scores than the repo's fixture).
-Usage: python independent_tests.py <path to qa_auditor/validation>   (stdlib only; writes tests/results.json in the add-on)
+Usage: python independent_tests.py <path to qa_auditor/validation>   (stdlib only; writes tests/results.json in the repository)
 Each case: expected behaviour is stated BEFORE running; the actual result is recorded.
 Outcomes per auditor: ALERT(n) | SILENT | CRASH(ExcType) ; plus whether exceptions.csv was written.
 """

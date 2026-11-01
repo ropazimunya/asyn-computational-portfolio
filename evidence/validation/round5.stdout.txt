@@ -1,0 +1,4 @@
+PASS clean_control exit 0 reports True findings []
+PASS malformed_coordinate_suffix exit 1 reports True findings ['CHECK_FAILED', 'INVALID_LOG']
+PASS malformed_pose_score_suffix exit 1 reports True findings ['CHECK_FAILED', 'INVALID_POSE']
+RESULT 3 / 3

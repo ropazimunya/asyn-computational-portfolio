@@ -1,0 +1,12 @@
+claim_id,claim,evidence,verification_status,scope_limit,public_disposition
+C01,Baseline 9/13 and revised 13/13 designed faults,validation comparison and execution summary,Reproduced for this edition,Synthetic cases only,Include
+C02,24 primary docking scores agree across records,Private scientific ZIP; independent read-only comparison,Independently compared,Record consistency only; no docking rerun,Narrative finding only
+C03,Five models per target were analyzed historically,Private NAC derived table,Historical table present,Raw ensembles and extraction scripts incomplete,Qualified historical narrative
+C04,Ligand mapping error compromised original MD,Private reconstruction audit,Historical report inspected,Faulty inputs and trajectories absent,Report diagnosis as historical; withhold stability claim
+C05,Corrected ligand file matches recorded checksum,Private SDF and historical SHA256,Independently hashed,Checksum is identity not geometry validation,Narrative identity finding only
+C06,Synthetic malformed fields fail closed,Q02 focused tests,Executed for this edition,Recognized documented labels only,Include with scope
+C07,Risk management reasoning demonstrated,R03 worked case and risk register,Retrospective educational assessment,Not regulated QMS implementation,Include
+C08,Regulatory evidence gaps assessed,E01 claim assessment and FDA references,Educational exercise,No product classification or compliance determination,Include
+C09,Docking proves binding or stabilization,No experimental evidence supplied,Unsupported,No biological validation,Do not claim
+C10,Receptor provenance and usage permission established,Conflicting manuscript and historical audit,Unresolved,No direct provenance reconstruction performed,Do not claim
+C11,Later MD independently corrects earlier error,Later manuscript narrative only,Not independently verified,Missing trajectories and preparation lineage,Do not claim

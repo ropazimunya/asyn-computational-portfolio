@@ -2,7 +2,7 @@
 """Independent-style malformed-input CLI regression tests for synthetic Vina records.
 
 No docking, MD, network, or real research data used.
-Run from any directory: python3 tests/additional_hardening_tests.py
+Run from the repository root: python3 qa_auditor/tests/additional_hardening_tests.py
 """
 from pathlib import Path
 import csv

@@ -1,0 +1,11 @@
+PASS clean_control exit= 0 reports= True types= []
+PASS fractional_exhaustiveness exit= 1 reports= True types= ['CHECK_FAILED', 'INVALID_CONFIG', 'MISSING_CONFIG_FIELD']
+PASS nonfinite_exhaustiveness exit= 1 reports= True types= ['CHECK_FAILED', 'INVALID_CONFIG', 'MISSING_CONFIG_FIELD']
+PASS extra_csv_cell exit= 1 reports= True types= ['INVALID_CSV_ROW_WIDTH']
+PASS duplicate_csv_header exit= 1 reports= True types= ['DUPLICATE_CSV_HEADER']
+PASS conflicting_config exit= 1 reports= True types= ['CHECK_FAILED', 'INVALID_CONFIG', 'MISSING_CONFIG_FIELD']
+PASS concatenated_log exit= 1 reports= True types= ['CHECK_FAILED', 'INVALID_LOG']
+PASS invalid_utf8 exit= 1 reports= True types= ['CHECK_FAILED', 'MISSING_CONFIG_FIELD', 'UNREADABLE_FILE']
+PASS custom_version exit= 1 reports= True types= ['CHECK_FAILED']
+PASS unsafe_zip_member exit= 1 reports= True types= ['UNSAFE_ARCHIVE_PATH']
+RESULT: 10 / 10
