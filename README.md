@@ -12,6 +12,10 @@ The strongest public evidence is the executable QA workflow. The scientific arch
 
 [Open the interactive AlphaFold GFP tutorial](https://ropazimunya.github.io/asyn-computational-portfolio/alphafold-gfp-demo.html) to rotate public GFP structures, compare residue-level prediction confidence with experimental coverage, and explore predicted aligned error (PAE).
 
+## Northbridge molecular diagnostics audit
+
+[Try the interactive Northbridge case](https://ropazimunya.github.io/asyn-computational-portfolio/northbridge-release-approval.html). Review the simulated QC and result records and decide how to investigate a missing release approval. The case includes downloads of the Stage 3 draft audit report and the working paper covering all 18 checkpoints.
+
 ## Explore five competencies
 
 | Case study | Work shown | Evidence |
