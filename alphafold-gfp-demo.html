@@ -55,6 +55,30 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--gre
 <h3>Choose a position in the sequence</h3><p class="muted">Use the arrow keys to move through the sequence.</p>
 <div id="sequence" role="group" aria-label="GFP amino acid sequence"></div>
 </section>
+<section class="panel" aria-labelledby="pae-title">
+<h2 id="pae-title">Read the Predicted Aligned Error (PAE)</h2>
+<p><strong>pLDDT</strong> tells you how confident AlphaFold is in the local structure around one residue. <strong>PAE</strong> estimates the positional error at one residue if the model and true structure were aligned on another residue. Lower PAE means more confidence in their relative placement. The value is measured in ångströms (Å).</p>
+<p>Open the <a href="https://alphafold.ebi.ac.uk/entry/P42212">GFP entry in AlphaFold DB</a>, download its Predicted Aligned Error JSON, and load it here to explore the matrix.</p>
+<label for="pae-file"><strong>Load GFP PAE JSON</strong></label> <input id="pae-file" type="file" accept=".json,application/json">
+<p id="pae-status" class="muted" role="status">Choose the PAE file for AF-P42212-F1. Your file is read in this browser.</p>
+<div id="pae-plot" hidden>
+<div class="controls">
+<label>Aligned on <select id="pae-anchor"></select></label>
+<label>Measured at <select id="pae-target"></select></label>
+<button id="pae-swap" type="button">Swap residues</button>
+</div>
+<p id="pae-value" class="readout" aria-live="polite"></p>
+<div style="max-width:390px">
+<div class="muted">Horizontal axis · residue the model is aligned on</div>
+<canvas id="pae-map" width="476" height="476" style="width:100%;height:auto;display:block;cursor:crosshair" role="img" aria-label="PAE heatmap. Use the two residue selectors to explore any cell."></canvas>
+<div class="muted">Vertical axis · residue where error is measured</div>
+<div id="pae-legend" class="muted"></div>
+</div>
+<p class="muted">Select a cell or use the menus. Compare Phe 99 with Glu 235, then swap their roles. The two directions can have different values.</p>
+</div>
+<details><summary>How do I interpret a PAE plot?</summary><p>Look at off-diagonal cells to assess confidence in the relative placement of regions far apart in the sequence. Regions can each have high pLDDT while their placement relative to each other has high PAE. The plot reports the model’s expected error in relative placement. Use the experimental structure separately to see which residues have deposited coordinates.</p></details>
+<p class="muted"><a href="https://alphafold.ebi.ac.uk/faq">AlphaFold DB guide to PAE and its JSON format</a></p>
+</section>
 <section class="panel" aria-labelledby="challenge">
 <h2 id="challenge">Check your interpretation</h2>
 <form id="quiz"><fieldset><legend>Which conclusion is supported by the two views?</legend>
@@ -352,6 +376,86 @@ $('quiz').onsubmit=(event) => {
   };
   $('feedback').hidden=false;
   $('feedback').textContent=messages[answer];
+};
+let pae;
+let paeMax;
+let paeImage;
+const anchorMenu = $('pae-anchor');
+const targetMenu = $('pae-target');
+const paeMap = $('pae-map');
+for (const residue of residues) {
+  for (const menu of [anchorMenu, targetMenu]) {
+    menu.add(new Option(label(residue), residue.n));
+  }
+}
+anchorMenu.value = 99;
+targetMenu.value = 235;
+
+function renderPae() {
+  if (!pae) return;
+  const anchor = Number(anchorMenu.value);
+  const target = Number(targetMenu.value);
+  const value = pae[anchor - 1][target - 1];
+  $('pae-value').textContent = 'Align on ' + label(residues[anchor - 1]) +
+    ' · Expected error at ' + label(residues[target - 1]) + ' · ' + value + ' Å';
+  const ctx = paeMap.getContext('2d');
+  ctx.putImageData(paeImage, 0, 0);
+  const x = (anchor - .5) * 2;
+  const y = (target - .5) * 2;
+  ctx.strokeStyle = '#122f48';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(x - 7, y - 7, 14, 14);
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(x - 7, y - 7, 14, 14);
+}
+$('pae-file').addEventListener('change', async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+  try {
+    const data = JSON.parse(await file.text())[0];
+    const matrix = data.predicted_aligned_error;
+    const max = data.max_predicted_aligned_error;
+    const count = residues.length;
+    if (!Array.isArray(matrix) || matrix.length !== count || !Number.isFinite(max) ||
+        max <= 0 || !matrix.every(row => Array.isArray(row) && row.length === count &&
+          row.every(value => Number.isFinite(value) && value >= 0 && value <= Math.ceil(max)))) {
+      throw new Error('Invalid PAE matrix');
+    }
+    const image = paeMap.getContext('2d').createImageData(count * 2, count * 2);
+    for (let y = 0; y < image.height; y++) {
+      for (let x = 0; x < image.width; x++) {
+        const shade = Math.min(1, matrix[x >> 1][y >> 1] / max);
+        image.data.set([12 + 220 * shade, 76 + 167 * shade, 46 + 185 * shade, 255],
+          (y * image.width + x) * 4);
+      }
+    }
+    pae = matrix;
+    paeMax = max;
+    paeImage = image;
+    $('pae-status').textContent = 'Loaded a ' + count + ' × ' + count +
+      ' matrix. Confirm the file came from the GFP entry.';
+    $('pae-legend').textContent = 'Dark green · lower error (0 Å)    |    Pale green · higher error (' + paeMax + ' Å)';
+    $('pae-plot').hidden = false;
+    renderPae();
+  } catch {
+    pae = null;
+    $('pae-plot').hidden = true;
+    $('pae-status').textContent = 'Could not read this file. Choose the AlphaFold DB PAE JSON for the 238-residue GFP entry.';
+  }
+});
+anchorMenu.onchange = renderPae;
+targetMenu.onchange = renderPae;
+$('pae-swap').onclick = () => {
+  [anchorMenu.value, targetMenu.value] = [targetMenu.value, anchorMenu.value];
+  renderPae();
+};
+paeMap.onclick = (event) => {
+  const box = paeMap.getBoundingClientRect();
+  const index = (fraction) => Math.max(1, Math.min(residues.length, Math.floor(fraction * residues.length) + 1));
+  anchorMenu.value = index((event.clientX - box.left) / box.width);
+  targetMenu.value = index((event.clientY - box.top) / box.height);
+  renderPae();
 };
 molecular = setupMolecularViewers();
 new ResizeObserver(resizeViews).observe($('views'));
