@@ -8,6 +8,10 @@ This portfolio shows how I examine computational research records, investigate d
 
 The strongest public evidence is the executable QA workflow. The scientific archive also supports a documented investigation of docking records. Structural and molecular-dynamics activities are described with explicit source and verification boundaries. This work does not establish a validated cryptic pocket, ligand binding, therapeutic activity or regulated-system compliance.
 
+## Interactive AlphaFold tutorial
+
+[How to read an AlphaFold model](alphafold-gfp-demo.html) uses public GFP structures to compare local prediction confidence with experimental coverage. Download the HTML file and open it in a browser to rotate the structures, select residues, and try the quiz.
+
 ## Explore five competencies
 
 | Case study | Work shown | Evidence |
