@@ -10,7 +10,7 @@ The strongest public evidence is the executable QA workflow. The scientific arch
 
 ## Interactive AlphaFold tutorial
 
-[How to read an AlphaFold model](alphafold-gfp-demo.html) uses public GFP structures to compare local prediction confidence with experimental coverage. Download the HTML file and open it in a browser to rotate the structures, select residues, and try the quiz.
+[Open the interactive AlphaFold GFP tutorial](https://ropazimunya.github.io/asyn-computational-portfolio/alphafold-gfp-demo.html) to rotate public GFP structures, compare residue-level prediction confidence with experimental coverage, and explore predicted aligned error (PAE).
 
 ## Explore five competencies
 
