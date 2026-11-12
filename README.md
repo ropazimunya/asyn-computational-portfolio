@@ -4,7 +4,7 @@
 
 **Ropafadzo Zimunya | Independent research and professional portfolio**
 
-This portfolio shows how I examine computational research records, investigate discrepancies, test quality controls and decide which conclusions the evidence can support. It draws on an exploratory WT/A53T α-synuclein project and includes a runnable Python demonstration using synthetic records.
+This portfolio shows how I assess the quality of computational research and explain what the evidence supports. It includes an interactive AlphaFold tutorial using public green fluorescent protein (GFP) data, an investigation of α-synuclein docking records, and a runnable Python quality-control example using synthetic records.
 
 The strongest public evidence is the executable QA workflow. The scientific archive also supports a documented investigation of docking records. Structural and molecular-dynamics activities are described with explicit source and verification boundaries. This work does not establish a validated cryptic pocket, ligand binding, therapeutic activity or regulated-system compliance.
 
