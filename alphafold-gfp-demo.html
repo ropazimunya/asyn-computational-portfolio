@@ -4,27 +4,27 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>How to read an AlphaFold model</title>
 <style>
-:root{font-family:Inter,system-ui,sans-serif;color:#142926;background:#f5f7f2;--green:#125846;--line:#d8e1d9}
+:root{font-family:Inter,system-ui,sans-serif;color:#14253e;background:#ffffff;--navy:#203e66;--line:#d9e2ed}
 *{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:auto;padding:44px 24px 60px}
-header{max-width:770px;margin-bottom:28px}header p{font-size:1.13rem;line-height:1.55;color:#425b55}
+header{max-width:770px;margin-bottom:28px}header p{font-size:1.13rem;line-height:1.55;color:#465a72}
 h1{font-size:clamp(2.3rem,6vw,4rem);letter-spacing:-.065em;line-height:1.02;margin:8px 0 16px}
-h2{font-size:1.35rem;margin:0 0 10px}h3{font-size:1rem;margin:0}.eyebrow{font-size:.84rem;font-weight:750;color:var(--green)}
+h2{font-size:1.35rem;margin:0 0 10px}h3{font-size:1rem;margin:0}.eyebrow{font-size:.84rem;font-weight:750;color:var(--navy)}
 section{margin-top:22px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:20px}
 .row,.legend,.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row{justify-content:space-between}
-button,select{font:inherit;border:1px solid #a8bcb0;background:white;color:#17352b;border-radius:8px;padding:8px 11px;cursor:pointer}
-button:hover,button[aria-pressed=true]{background:#dceee3;border-color:#387858}button:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #0568a9;outline-offset:3px}
-.primary{background:var(--green);color:white}.primary:hover{background:#28715c}
-.views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:13px}.viewer{background:#102421;color:#f1fff7;border-radius:14px;overflow:hidden}
-.viewer h3,.viewer p{padding:0 14px}.viewer h3{padding-top:14px}.viewer p{margin:0;padding-bottom:12px;min-height:42px;font-size:.89rem;color:#cde1d9}
+button,select{font:inherit;border:1px solid #a5b5c8;background:white;color:#172d49;border-radius:8px;padding:8px 11px;cursor:pointer}
+button:hover,button[aria-pressed=true]{background:#e6eef9;border-color:#557aa7}button:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #0568a9;outline-offset:3px}
+.primary{background:var(--navy);color:white}.primary:hover{background:#315784}
+.views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:13px}.viewer{background:#20242b;color:#f6f8fc;border-radius:14px;overflow:hidden}
+.viewer h3,.viewer p{padding:0 14px}.viewer h3{padding-top:14px}.viewer p{margin:0;padding-bottom:12px;min-height:42px;font-size:.89rem;color:#d5dce5}
 .molecule{position:relative;width:100%;height:320px}.molecule canvas{touch-action:none}canvas.trace{width:100%;height:272px;display:block;cursor:grab;touch-action:pan-y}
 .legend{font-size:.84rem;margin:12px 0}.legend span{display:inline-flex;align-items:center;gap:5px}.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
 #sequence{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:4px;max-height:148px;overflow:auto;padding:4px}
-#sequence button{padding:4px;font-family:monospace;font-size:.85rem}#sequence button small{display:block;color:#405951}
-.readout{background:#e8f2ec;border-radius:10px;padding:12px;margin:12px 0;line-height:1.45}.muted{color:#425b55;font-size:.92rem}
+#sequence button{padding:4px;font-family:monospace;font-size:.85rem}#sequence button small{display:block;color:#485e77}
+.readout{background:#ecf2fa;border-radius:10px;padding:12px;margin:12px 0;line-height:1.45}.muted{color:#465a72;font-size:.92rem}
 fieldset{border:0;margin:0;padding:0}legend{font-weight:700;margin-bottom:8px}.answer{display:block;margin:10px 0}.answer input{margin-right:8px}
-details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--green)}footer{margin-top:24px;line-height:1.5}
+details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--navy)}footer{margin-top:24px;line-height:1.5}
 [hidden]{display:none!important}@media(max-width:640px){main{padding:26px 14px 40px}.panel{padding:14px}.views{grid-template-columns:1fr}.molecule{height:252px}canvas.trace{height:220px}}
-.fold-flow,.fold-levels{display:grid;gap:10px;margin:14px 0}.fold-flow{grid-template-columns:1fr auto 1fr auto 1fr;align-items:center}.fold-flow>div,.fold-levels article{border-radius:10px;padding:12px;background:#f1f6ef}.fold-flow small{display:block;margin-top:4px;color:#425b55}.fold-flow .fold-arrow{text-align:center;background:none;padding:2px}.fold-levels{grid-template-columns:repeat(3,minmax(0,1fr))}.fold-levels p{margin:6px 0 0;font-size:.91rem;line-height:1.45}.fold-chain,.fold-sketch{height:78px;width:100%}.fold-chain{display:flex;align-items:center;justify-content:center}.fold-chain span{display:grid;place-items:center;background:#d3ebdc;color:#184d3b;font-weight:750;width:27px;height:27px;border-radius:50%;position:relative;margin-right:8px}.fold-chain span+span:before{content:"";position:absolute;right:100%;width:8px;height:2px;background:#699783}.fold-sketch{display:block;object-fit:contain}.readout p{margin:6px 0 8px}
+.fold-flow,.fold-levels{display:grid;gap:10px;margin:14px 0}.fold-flow{grid-template-columns:1fr auto 1fr auto 1fr;align-items:center}.fold-flow>div,.fold-levels article{border-radius:10px;padding:12px;background:#f3f6fb}.fold-flow small{display:block;margin-top:4px;color:#465a72}.fold-flow .fold-arrow{text-align:center;background:none;padding:2px}.fold-levels{grid-template-columns:repeat(3,minmax(0,1fr))}.fold-levels p{margin:6px 0 0;font-size:.91rem;line-height:1.45}.fold-chain,.fold-sketch{height:78px;width:100%}.fold-chain{display:flex;align-items:center;justify-content:center}.fold-chain span{display:grid;place-items:center;background:#dce8f8;color:#24476e;font-weight:750;width:27px;height:27px;border-radius:50%;position:relative;margin-right:8px}.fold-chain span+span:before{content:"";position:absolute;right:100%;width:8px;height:2px;background:#7894b7}.fold-sketch{display:block;object-fit:contain}.readout p{margin:6px 0 8px}
 @media(max-width:660px){.fold-flow,.fold-levels{grid-template-columns:1fr}.fold-flow .fold-arrow{font-size:0}.fold-flow .fold-arrow:before{content:"↓";font-size:1rem}.fold-flow .fold-arrow small{display:inline;font-size:.82rem;margin-left:6px}.fold-levels article{min-width:0}}
 </style>
 </head>
@@ -240,7 +240,7 @@ function setupMolecularViewers() {
     const entries = [['prediction','model'],['experiment','exp']].map(([id,key]) => {
       const container = $(id+'-3d');
       container.hidden = false;
-      const viewer = $3Dmol.createViewer(container,{backgroundColor:'#102421',antialias:true});
+      const viewer = $3Dmol.createViewer(container,{backgroundColor:'#20242b',antialias:true});
       const model = viewer.addModel(structures[key],'pdb');
       $(id).hidden = true;
       return {viewer,model,key,container};
@@ -266,15 +266,15 @@ function drawMolecularViewers() {
   for (const {viewer,model,key,container} of molecular.entries) {
     if (!container.clientWidth) continue;
     model.setStyle({}, {cartoon:{colorfunc:(atom) =>
-      key==='exp' ? '#8fe1c1' : $('confidence').checked && residues[atom.resi-1] ?
-        band(residues[atom.resi-1]).color : '#d2e5df'}});
+      key==='exp' ? '#d9dee7' : $('confidence').checked && residues[atom.resi-1] ?
+        band(residues[atom.resi-1]).color : '#c8d4e6'}});
     viewer.removeAllShapes();
     viewer.removeAllLabels();
     const point = residue[key];
     if (point) {
       const [x,y,z]=point;
       viewer.addSphere({center:{x,y,z},radius:0.85,color:'#ffffff'});
-      viewer.addLabel(label(residue),{position:{x,y,z},fontSize:13,backgroundColor:'#102421',fontColor:'white',borderColor:'#9bc1b5',borderThickness:1,inFront:true});
+      viewer.addLabel(label(residue),{position:{x,y,z},fontSize:13,backgroundColor:'#20242b',fontColor:'white',borderColor:'#adbdd2',borderThickness:1,inFront:true});
     }
     viewer.render();
   }
@@ -345,7 +345,7 @@ function draw(canvas, key) {
   ctx.lineCap='round';
   for (const [a,b,r] of segments) {
     ctx.globalAlpha=Math.min(1,Math.max(.36,.7+(a[2]+b[2])/100));
-    ctx.strokeStyle=key==='exp'?'#8fe1c1':$('confidence').checked?band(r).color:'#d2e5df';
+    ctx.strokeStyle=key==='exp'?'#d9dee7':$('confidence').checked?band(r).color:'#c8d4e6';
     ctx.lineWidth=3.2;
     ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
   }
@@ -354,7 +354,7 @@ function draw(canvas, key) {
   if (point) {
     const [x,y]=point;
     ctx.beginPath();ctx.arc(x,y,7,0,Math.PI*2);
-    ctx.fillStyle='#102421';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='white';ctx.stroke();
+    ctx.fillStyle='#20242b';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='white';ctx.stroke();
     ctx.fillStyle='white';ctx.font='bold 13px system-ui';
     ctx.textAlign=x>width-75?'right':'left';
     ctx.fillText(label(residues[selected-1]),x+(x>width-75?-11:11),Math.max(15,y-9));
@@ -489,7 +489,7 @@ function drawFoldingIntro() {
   const secondary = $('secondary-sketch').getContext('2d');
   secondary.lineCap = 'round';
   secondary.lineWidth = 6;
-  secondary.strokeStyle = '#146d58';
+  secondary.strokeStyle = '#295a89';
   secondary.beginPath();
   for (let step = 0; step <= 100; step++) {
     const x = 23 + step * 1.1;
@@ -511,7 +511,7 @@ function drawFoldingIntro() {
     secondary.fill();
     secondary.restore();
   }
-  secondary.fillStyle = '#263f37';
+  secondary.fillStyle = '#243d5c';
   secondary.font = '15px system-ui';
   secondary.textAlign = 'center';
   secondary.fillText('α-helix',78,96);
@@ -529,7 +529,7 @@ function drawFoldingIntro() {
   tertiary.lineWidth = 3;
   for (const [a,b] of segments) {
     const lightness = 31 + Math.max(0,Math.min(30,15 + (a[2]+b[2]) * .55));
-    tertiary.strokeStyle = 'hsl(157 52% ' + lightness + '%)';
+    tertiary.strokeStyle = 'hsl(213 46% ' + lightness + '%)';
     tertiary.beginPath();
     tertiary.moveTo(a[0],a[1]);
     tertiary.lineTo(b[0],b[1]);
