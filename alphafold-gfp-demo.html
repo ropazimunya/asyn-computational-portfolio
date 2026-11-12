@@ -24,10 +24,38 @@ button:hover,button[aria-pressed=true]{background:#dceee3;border-color:#387858}b
 fieldset{border:0;margin:0;padding:0}legend{font-weight:700;margin-bottom:8px}.answer{display:block;margin:10px 0}.answer input{margin-right:8px}
 details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--green)}footer{margin-top:24px;line-height:1.5}
 [hidden]{display:none!important}@media(max-width:640px){main{padding:26px 14px 40px}.panel{padding:14px}.views{grid-template-columns:1fr}.molecule{height:252px}canvas.trace{height:220px}}
+.fold-flow,.fold-levels{display:grid;gap:10px;margin:14px 0}.fold-flow{grid-template-columns:1fr auto 1fr auto 1fr;align-items:center}.fold-flow>div,.fold-levels article{border-radius:10px;padding:12px;background:#f1f6ef}.fold-flow small{display:block;margin-top:4px;color:#425b55}.fold-flow .fold-arrow{text-align:center;background:none;padding:2px}.fold-levels{grid-template-columns:repeat(3,minmax(0,1fr))}.fold-levels p{margin:6px 0 0;font-size:.91rem;line-height:1.45}.fold-chain,.fold-sketch{height:78px;width:100%}.fold-chain{display:flex;align-items:center;justify-content:center}.fold-chain span{display:grid;place-items:center;background:#d3ebdc;color:#184d3b;font-weight:750;width:27px;height:27px;border-radius:50%;position:relative;margin-right:8px}.fold-chain span+span:before{content:"";position:absolute;right:100%;width:8px;height:2px;background:#699783}.fold-sketch{display:block;object-fit:contain}.readout p{margin:6px 0 8px}
+@media(max-width:660px){.fold-flow,.fold-levels{grid-template-columns:1fr}.fold-flow .fold-arrow{font-size:0}.fold-flow .fold-arrow:before{content:"↓";font-size:1rem}.fold-flow .fold-arrow small{display:inline;font-size:.82rem;margin-left:6px}.fold-levels article{min-width:0}}
 </style>
 </head>
 <body><main>
 <header><div class="eyebrow">Interactive protein structure tutorial</div><h1>How to read an AlphaFold model</h1><p>Where is AlphaFold more confident in its prediction of green fluorescent protein (GFP)? Pick a residue, look at its confidence score, and compare it with an experimental structure.</p></header>
+<section class="panel" aria-labelledby="folding-title">
+<h2 id="folding-title">From a gene to a folded protein</h2>
+<div class="fold-flow" aria-label="DNA is transcribed into messenger RNA, which a ribosome translates into an amino acid chain">
+  <div><strong>DNA</strong><small>A gene stores the instructions.</small></div>
+  <div class="fold-arrow" aria-hidden="true">→ <small>Transcription</small></div>
+  <div><strong>Messenger RNA</strong><small>A copy carries the instructions to a ribosome.</small></div>
+  <div class="fold-arrow" aria-hidden="true">→ <small>Translation</small></div>
+  <div><strong>Amino acid chain</strong><small>The ribosome reads the mRNA and joins amino acids in order.</small></div>
+</div>
+<div class="fold-levels">
+  <article><h3>Primary · the sequence</h3>
+    <div class="fold-chain" aria-label="The first five amino acids of GFP: methionine, serine, lysine, glycine, glutamate"><span>M</span><span>S</span><span>K</span><span>G</span><span>E</span><span aria-hidden="true">…</span></div>
+    <p>Each letter stands for one amino acid. Peptide bonds link the chain. These are GFP’s first five residues.</p>
+  </article>
+  <article><h3>Secondary · local shapes</h3>
+    <canvas class="fold-sketch" id="secondary-sketch" width="300" height="112" role="img" aria-label="A coiled alpha helix and a beta sheet of adjacent strands"></canvas>
+    <p>Hydrogen bonds along the backbone help stabilize local shapes such as <strong>α-helices</strong> and <strong>β-sheets</strong>.</p>
+  </article>
+  <article><h3>Tertiary · the whole 3D fold</h3>
+    <canvas class="fold-sketch" id="tertiary-sketch" width="300" height="112" role="img" aria-label="Backbone overview of AlphaFold’s predicted GFP barrel"></canvas>
+    <p>Parts of the chain pack together into one 3D structure. In GFP, β-strands form a barrel around a central helix.</p>
+  </article>
+</div>
+<p>As the chain folds, water-avoiding side chains tend to pack inside. Hydrogen bonds and attractions between opposite charges can also help stabilize the fold. Some proteins gain extra stability from covalent disulfide bonds.</p>
+<div class="readout"><strong>Where AlphaFold comes in</strong><p>AlphaFold starts with the amino acid sequence and predicts 3D atomic coordinates. Here we focus on GFP’s tertiary structure. Next, use pLDDT and PAE to ask how confident the model is about local structure and the placement of residues relative to each other.</p><a href="#explore">Explore the GFP prediction ↓</a></div>
+</section>
 <section class="panel" aria-labelledby="explore">
 <div class="row"><h2 id="explore">Explore GFP</h2><div class="controls"><button class="preset" data-n="99" type="button">Phe 99</button><button class="preset" data-n="235" type="button">Glu 235</button></div></div>
 <aside class="readout" aria-labelledby="try-first">
@@ -457,6 +485,58 @@ paeMap.onclick = (event) => {
   targetMenu.value = index((event.clientY - box.top) / box.height);
   renderPae();
 };
+function drawFoldingIntro() {
+  const secondary = $('secondary-sketch').getContext('2d');
+  secondary.lineCap = 'round';
+  secondary.lineWidth = 6;
+  secondary.strokeStyle = '#146d58';
+  secondary.beginPath();
+  for (let step = 0; step <= 100; step++) {
+    const x = 23 + step * 1.1;
+    const y = 46 + 17 * Math.sin(step * .23);
+    if (step === 0) secondary.moveTo(x,y);
+    else secondary.lineTo(x,y);
+  }
+  secondary.stroke();
+  secondary.fillStyle = '#356d98';
+  for (const [y, reverse] of [[29,false],[46,true],[63,false]]) {
+    secondary.save();
+    secondary.translate(reverse ? 276 : 173,y);
+    if (reverse) secondary.scale(-1,1);
+    secondary.beginPath();
+    for (const [x,dy] of [[0,-4],[82,-4],[82,-8],[103,0],[82,8],[82,4],[0,4]]) {
+      secondary.lineTo(x,dy);
+    }
+    secondary.closePath();
+    secondary.fill();
+    secondary.restore();
+  }
+  secondary.fillStyle = '#263f37';
+  secondary.font = '15px system-ui';
+  secondary.textAlign = 'center';
+  secondary.fillText('α-helix',78,96);
+  secondary.fillText('β-sheet',224,96);
+
+  const tertiary = $('tertiary-sketch').getContext('2d');
+  const points = residues.map(({model:[x,y,z]}) => [
+    150 + 2.4 * (.94*x + .34*z),
+    56 - 2.4 * (.97*y - .24*(.94*z - .34*x)),
+    .24*y + .97*(.94*z - .34*x)
+  ]);
+  const segments = points.slice(1).map((point,i) => [points[i],point]);
+  segments.sort((a,b) => (a[0][2]+a[1][2])-(b[0][2]+b[1][2]));
+  tertiary.lineCap = 'round';
+  tertiary.lineWidth = 3;
+  for (const [a,b] of segments) {
+    const lightness = 31 + Math.max(0,Math.min(30,15 + (a[2]+b[2]) * .55));
+    tertiary.strokeStyle = 'hsl(157 52% ' + lightness + '%)';
+    tertiary.beginPath();
+    tertiary.moveTo(a[0],a[1]);
+    tertiary.lineTo(b[0],b[1]);
+    tertiary.stroke();
+  }
+}
+drawFoldingIntro();
 molecular = setupMolecularViewers();
 new ResizeObserver(resizeViews).observe($('views'));
 select(selected,true);
