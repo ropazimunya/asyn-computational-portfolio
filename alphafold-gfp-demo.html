@@ -26,6 +26,7 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--gre
 [hidden]{display:none!important}@media(max-width:640px){main{padding:26px 14px 40px}.panel{padding:14px}.views{grid-template-columns:1fr}.molecule{height:252px}canvas.trace{height:220px}}
 .fold-flow,.fold-levels{display:grid;gap:10px;margin:14px 0}.fold-flow{grid-template-columns:1fr auto 1fr auto 1fr;align-items:center}.fold-flow>div,.fold-levels article{border-radius:10px;padding:12px;background:#f1f6ef}.fold-flow small{display:block;margin-top:4px;color:#425b55}.fold-flow .fold-arrow{text-align:center;background:none;padding:2px}.fold-levels{grid-template-columns:repeat(3,minmax(0,1fr))}.fold-levels p{margin:6px 0 0;font-size:.91rem;line-height:1.45}.fold-chain,.fold-sketch{height:78px;width:100%}.fold-chain{display:flex;align-items:center;justify-content:center}.fold-chain span{display:grid;place-items:center;background:#d3ebdc;color:#184d3b;font-weight:750;width:27px;height:27px;border-radius:50%;position:relative;margin-right:8px}.fold-chain span+span:before{content:"";position:absolute;right:100%;width:8px;height:2px;background:#699783}.fold-sketch{display:block;object-fit:contain}.readout p{margin:6px 0 8px}
 @media(max-width:660px){.fold-flow,.fold-levels{grid-template-columns:1fr}.fold-flow .fold-arrow{font-size:0}.fold-flow .fold-arrow:before{content:"↓";font-size:1rem}.fold-flow .fold-arrow small{display:inline;font-size:.82rem;margin-left:6px}.fold-levels article{min-width:0}}
+.strand-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.strand-sequence{font-family:monospace;letter-spacing:.12em}.strand-tone{color:#67385f;background:#f7e5f1}.strand-mark{box-shadow:inset 0 -4px #e585c3}
 </style>
 </head>
 <body><main>
@@ -54,10 +55,19 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--gre
   </article>
 </div>
 <p>As the chain folds, water-avoiding side chains tend to pack inside. Hydrogen bonds and attractions between opposite charges can also help stabilize the fold. Some proteins gain extra stability from covalent disulfide bonds.</p>
-<div class="readout"><strong>Where AlphaFold comes in</strong><p>AlphaFold starts with the amino acid sequence and predicts 3D atomic coordinates. Here we focus on GFP’s tertiary structure. Next, use pLDDT and PAE to ask how confident the model is about local structure and the placement of residues relative to each other.</p><a href="#explore">Explore the GFP prediction ↓</a></div>
+<div class="readout"><strong>Where AlphaFold comes in</strong><p>AlphaFold2 compares related protein sequences for clues about which amino acids may sit near one another. It uses those clues to predict a 3D shape. Here we focus on GFP’s tertiary structure. Next, use pLDDT and PAE to ask how confident the model is about local structure and the placement of residues relative to each other.</p><a href="#explore">Explore the GFP prediction ↓</a></div>
 </section>
 <section class="panel" aria-labelledby="explore">
 <div class="row"><h2 id="explore">Explore GFP</h2><div class="controls"><button class="preset" data-n="99" type="button">Phe 99</button><button class="preset" data-n="235" type="button">Glu 235</button></div></div>
+<aside class="readout" aria-labelledby="strand-title">
+<h3 id="strand-title">Follow one GFP strand</h3>
+<p>Residues <strong>92–100</strong> are <strong class="strand-sequence">YVQERTIFF</strong> in GFP’s amino acid sequence. In 3D they form a β-strand, one of the strands that make up the wall of the GFP barrel.</p>
+<div class="strand-controls">
+<button id="strand-focus" type="button" class="strand-tone" aria-pressed="false">Highlight and zoom to residues 92–100</button>
+<button id="strand-overview" type="button" disabled>See the whole barrel</button>
+</div>
+<p class="muted" id="strand-status" role="status">Select the sequence to highlight this stretch in pink in both the AlphaFold prediction and the experimental model. Pink marks the strand selection.</p>
+</aside>
 <aside class="readout" aria-labelledby="try-first">
 <h3 id="try-first">Try this first</h3>
 <ol>
@@ -73,6 +83,7 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--gre
 <button id="in" type="button" aria-label="Zoom in">+</button><button id="out" type="button" aria-label="Zoom out">−</button>
 <button id="reset" type="button">Reset view</button>
 </div>
+<p class="muted">The pLDDT colors show how confident AlphaFold is about the shape around each amino acid.</p>
 <div class="legend" id="legend"><span><i style="background:#4677ff"></i>Very high &gt;90</span><span><i style="background:#67d7ff"></i>Confident &gt;70–90</span><span><i style="background:#ffdb53"></i>Low &gt;50–70</span><span><i style="background:#ff9b50"></i>Very low ≤50</span></div>
 <div class="views" id="views">
 <div class="viewer"><h3>AlphaFold prediction · P42212</h3><div class="molecule" id="prediction-3d" role="img" aria-label="Interactive molecular cartoon" hidden></div><canvas class="trace" id="prediction" role="img" aria-label="Rotatable GFP prediction backbone trace"></canvas><p id="model-note"></p></div>
@@ -102,7 +113,8 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:650}a{color:var(--gre
 <div class="muted">Vertical axis · residue where error is measured</div>
 <div id="pae-legend" class="muted"></div>
 </div>
-<p class="muted">Select a cell or use the menus. Compare Phe 99 with Glu 235, then swap their roles. The two directions can have different values.</p>
+<p class="muted">Start with Phe 99 as the anchor and read the expected error at Glu 235. Then select <strong>Swap residues</strong> to anchor on Glu 235 and read the expected error at Phe 99. The two directions can have different values because the anchor changes.</p>
+<button id="pae-example" type="button">Return to Phe 99 and Glu 235</button>
 </div>
 <details><summary>How do I interpret a PAE plot?</summary><p>Look at off-diagonal cells to assess confidence in the relative placement of regions far apart in the sequence. Regions can each have high pLDDT while their placement relative to each other has high PAE. The plot reports the model’s expected error in relative placement. Use the experimental structure separately to see which residues have deposited coordinates.</p></details>
 <p class="muted"><a href="https://alphafold.ebi.ac.uk/faq">AlphaFold DB guide to PAE and its JSON format</a></p>
@@ -230,9 +242,14 @@ const bands = [
   {min:-1, name:'Very low', color:'#ff9b50'}
 ];
 const band = (r) => bands.find((b) => r.p > b.min);
-const initial = {yaw:0.36,pitch:0.25,zoom:1};
+const initial = {yaw:0.36,pitch:0.25,zoom:1,center:null};
 const camera = {...initial};
 let selected = 99;
+let strandActive = false;
+const strandPositions = Array.from({length:9}, (_,i) => i+92);
+const strandColor = '#e585c3';
+const isStrand = (n) => strandActive && n >= 92 && n <= 100;
+const strandCenter = residues[95].model;
 const structures = JSON.parse($('structure-data').textContent);
 let molecular;
 function setupMolecularViewers() {
@@ -266,7 +283,7 @@ function drawMolecularViewers() {
   for (const {viewer,model,key,container} of molecular.entries) {
     if (!container.clientWidth) continue;
     model.setStyle({}, {cartoon:{colorfunc:(atom) =>
-      key==='exp' ? '#8fe1c1' : $('confidence').checked && residues[atom.resi-1] ?
+      isStrand(atom.resi) ? strandColor : key==='exp' ? '#8fe1c1' : $('confidence').checked && residues[atom.resi-1] ?
         band(residues[atom.resi-1]).color : '#d2e5df'}});
     viewer.removeAllShapes();
     viewer.removeAllLabels();
@@ -302,7 +319,22 @@ const buttons = residues.map((r) => {
   $('sequence').append(button);
   return button;
 });
-function select(n, reveal=false) {
+function setStrandMode(active) {
+  strandActive = active;
+  $('strand-focus').setAttribute('aria-pressed', active);
+  $('strand-overview').disabled = !active;
+  buttons.forEach((button,i) => button.classList.toggle('strand-mark',isStrand(i+1)));
+}
+function resetCamera() {
+  if (molecular) molecular.prediction.setView(molecular.home);
+  else { Object.assign(camera,initial); render(); }
+}
+function select(n, reveal=false, keepStrand=false) {
+  if (strandActive && !keepStrand) {
+    setStrandMode(false);
+    $('strand-status').textContent = 'Select the sequence again to highlight the β-strand in pink.';
+    resetCamera();
+  }
   selected = n;
   const r = residues[n-1];
   buttons.forEach((button,i) => {
@@ -322,6 +354,22 @@ function select(n, reveal=false) {
     ' local confidence. pLDDT describes the predicted structure around this position.';
   render();
 }
+$('strand-focus').onclick = () => {
+  setStrandMode(true);
+  select(99,true,true);
+  if (molecular) {
+    molecular.prediction.zoomTo({chain:'A',resi:strandPositions});
+  } else {
+    camera.center = strandCenter;
+    camera.zoom = 1.65;
+    render();
+  }
+  $('strand-status').textContent = 'Residues 92–100 are highlighted in pink. Follow the strand, then view the whole barrel.';
+};
+$('strand-overview').onclick = () => {
+  resetCamera();
+  $('strand-status').textContent = 'The pink strand is one part of the barrel wall. You can rotate either model to see how it fits.';
+};
 function draw(canvas, key) {
   const width = canvas.clientWidth, height = canvas.clientHeight;
   if (!width || !height) return;
@@ -333,6 +381,11 @@ function draw(canvas, key) {
   const cy=Math.cos(camera.yaw), sy=Math.sin(camera.yaw), cp=Math.cos(camera.pitch), sp=Math.sin(camera.pitch);
   const scale=Math.min(width,height)*camera.zoom/54;
   function project([x,y,z]) {
+    if (camera.center) {
+      x-=camera.center[0];
+      y-=camera.center[1];
+      z-=camera.center[2];
+    }
     const horizontal=x*cy+z*sy, depth=z*cy-x*sy;
     return [width/2+horizontal*scale,height/2-(y*cp-depth*sp)*scale,y*sp+depth*cp];
   }
@@ -345,8 +398,9 @@ function draw(canvas, key) {
   ctx.lineCap='round';
   for (const [a,b,r] of segments) {
     ctx.globalAlpha=Math.min(1,Math.max(.36,.7+(a[2]+b[2])/100));
-    ctx.strokeStyle=key==='exp'?'#8fe1c1':$('confidence').checked?band(r).color:'#d2e5df';
-    ctx.lineWidth=3.2;
+    const marked = isStrand(r.n) && isStrand(r.n-1);
+    ctx.strokeStyle=marked?strandColor:key==='exp'?'#8fe1c1':$('confidence').checked?band(r).color:'#d2e5df';
+    ctx.lineWidth=marked?5:3.2;
     ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
   }
   ctx.globalAlpha=1;
@@ -385,7 +439,7 @@ $('left').onclick=() => {if (molecular) molecular.prediction.rotate(-20,'y'); el
 $('right').onclick=() => {if (molecular) molecular.prediction.rotate(20,'y'); else {camera.yaw+=.32;render();}};
 $('in').onclick=() => {if (molecular) molecular.prediction.zoom(1.2); else {camera.zoom=Math.min(2.4,camera.zoom*1.2);render();}};
 $('out').onclick=() => {if (molecular) molecular.prediction.zoom(1/1.2); else {camera.zoom=Math.max(.55,camera.zoom/1.2);render();}};
-$('reset').onclick=() => {if (molecular) molecular.prediction.setView(molecular.home); else {Object.assign(camera,initial);render();}};
+$('reset').onclick=resetCamera;
 $('confidence').onchange=() => {$('legend').hidden=!$('confidence').checked;render();};
 $('compare').onclick=() => {
   const hidden=!$('reference').hidden;
@@ -472,6 +526,11 @@ $('pae-file').addEventListener('change', async (event) => {
     $('pae-status').textContent = 'Could not read this file. Choose the AlphaFold DB PAE JSON for the 238-residue GFP entry.';
   }
 });
+$('pae-example').onclick = () => {
+  anchorMenu.value = 99;
+  targetMenu.value = 235;
+  renderPae();
+};
 anchorMenu.onchange = renderPae;
 targetMenu.onchange = renderPae;
 $('pae-swap').onclick = () => {
